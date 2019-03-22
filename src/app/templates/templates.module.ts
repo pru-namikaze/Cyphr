@@ -14,6 +14,7 @@ import { SubstitutionCypherComponent } from './substitution-cypher/substitution-
 import { EncodingComponent } from './encoding/encoding.component';
 import { ModernCryptographComponent } from './modern-cryptograph/modern-cryptograph.component';
 import { DescriptionComponent } from './description/description.component';
+import { NodeTemplateComponent } from './node-template/node-template.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DescriptionComponent } from './description/description.component';
     SubstitutionCypherComponent,
     EncodingComponent,
     ModernCryptographComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    NodeTemplateComponent
   ],
   imports: [
     CommonModule

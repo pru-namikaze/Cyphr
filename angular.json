@@ -23,15 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/material-dashboard/assets/css/material-dashboard.css"
+              "src/styles.css"
             ],
             "scripts": [
-              "node_modules/material-dashboard/assets/js/core/jquery.min.js",
-              "node_modules/material-dashboard/assets/js/core/popper.min.js",
-              "node_modules/material-dashboard/assets/js/core/bootstrap-material-design.min.js",
-              "node_modules/material-dashboard/assets/js/material-dashboard.js"
             ],
             "es5BrowserSupport": true
           },

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-transform',
-  templateUrl: './transform.component.html',
-  styleUrls: ['./transform.component.css']
+  selector: 'app-node-template',
+  templateUrl: './node-template.component.html',
+  styleUrls: ['./node-template.component.css']
 })
-export class TransformComponent implements OnInit {
+
+export class NodeTemplateComponent implements OnInit {
 
   templateName: string;
   selectedOption: string;
@@ -30,3 +31,4 @@ export class TransformComponent implements OnInit {
   }
 
 }
+
