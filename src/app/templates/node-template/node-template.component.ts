@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DomainDataService } from '../../services/domain-data.service';
 
 @Component({
   selector: 'app-node-template',
@@ -8,16 +9,17 @@ import { Component, OnInit } from '@angular/core';
 
 export class NodeTemplateComponent implements OnInit {
 
-  templateName: string;
+  @Input() templateName: string = 'View';
+
   selectedOption: string;
   options: string[];
   selectedEncodeDecodeOption: string;
   encodeDecodeOptions: string[];
 
-  constructor() {
-    this.templateName = 'Transform';
-    this.options = ['Text Format', 'Numerical System', 'Bitwise Operation'];
-    this.selectedOption = 'Text Format';
+  constructor(public domainDataService: DomainDataService) {
+    console.log(domainDataService.getTypeArray());
+    this.options = this.domainDataService.getTypeCypherArray(this.templateName);
+    this.selectedOption = this.options[0];
     this.encodeDecodeOptions = ['Encode', 'Decode'];
     this.selectedEncodeDecodeOption = 'Encode';
 

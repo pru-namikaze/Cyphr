@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DomainDataService } from '../../services/domain-data.service';
+
 
 @Component({
   selector: 'app-main-component',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public domainDataService: DomainDataService) {
+  }
 
   ngOnInit() {
   }
