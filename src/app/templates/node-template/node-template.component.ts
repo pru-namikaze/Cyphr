@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomainDataService } from '../../services/domain-data.service';
+import { InfrastructureNodeListService } from '../../services/infrastructure-node-list.service';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-node-template',
@@ -9,28 +11,27 @@ import { DomainDataService } from '../../services/domain-data.service';
 
 export class NodeTemplateComponent implements OnInit {
 
-  @Input() templateName: string = 'View';
+  @Input() id: number;
 
-  selectedOption: string;
-  options: string[];
-  selectedEncodeDecodeOption: string;
-  encodeDecodeOptions: string[];
+  domainDataService: DomainDataService;
+  infrastructureNodeList: InfrastructureNodeListService;
+  common: CommonService;
 
-  constructor(public domainDataService: DomainDataService) {
-    console.log(domainDataService.getTypeArray());
-    this.options = this.domainDataService.getTypeCypherArray(this.templateName);
-    this.selectedOption = this.options[0];
-    this.encodeDecodeOptions = ['Encode', 'Decode'];
-    this.selectedEncodeDecodeOption = 'Encode';
-
+  constructor() {
   }
 
   ngOnInit() {
+    this.domainDataService = new DomainDataService();
+    this.infrastructureNodeList = new InfrastructureNodeListService();
+    this.common = new CommonService();
   }
 
-  selectOptionClick(option: string): void {
-    this.selectedOption = option;
+  selectencodeDecodeOptionClick(option: string): void {
+    this.infrastructureNodeList.NodeList[this.id][2] = option;
   }
-
+  selectOptionClick(cypherName: string): void {
+    this.infrastructureNodeList.NodeList[this.id][3][0] = cypherName;
+    this.infrastructureNodeList.NodeList[this.id][3][1] = this.common.getDefaultConfiguration(cypherName);
+  }
 }
 

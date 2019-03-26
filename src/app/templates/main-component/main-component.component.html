@@ -7,3 +7,4 @@
   <app-node-template *ngFor="let template of domainDataService.getTypeArray()" [templateName]=[template]></app-node-template><br />
 -->
 
+<app-node-template class="mx-5 transform-translateX-50vw" *ngFor="let node of infrastructureNodeList.NodeList" [id]=[node[0]]>

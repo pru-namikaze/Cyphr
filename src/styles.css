@@ -13,3 +13,7 @@ body
 {
   background-color: #a9a9a9;
 }
+.transform-translateX-50vw
+{
+  transform: translateX(50vw);
+}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { MainTemplateComponent } from './main-template.component';
 
@@ -17,7 +18,8 @@ import { NodeTemplateComponent } from './node-template/node-template.component';
     NodeTemplateComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     MainComponentComponent
