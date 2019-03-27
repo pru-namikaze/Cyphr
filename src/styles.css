@@ -22,3 +22,9 @@ body
   width: 2vw;
   transform: translateX(49vw);
 }
+.translate-center
+{
+  width: 30vw;
+  transform: translateX(35vw);
+}
+

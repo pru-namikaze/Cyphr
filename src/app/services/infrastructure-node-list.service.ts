@@ -18,6 +18,7 @@ import { of, Observable } from 'rxjs';
 
 export class InfrastructureNodeListService {
   NodeList: Array<[number, string, string, [string, any], string, string]> = [];
+  
 
   constructor() {
     this.NodeList.push([0, 'View', null, ['Text', null], 'Input String', null]);

@@ -10,6 +10,7 @@ import { MainComponentComponent } from './main-component/main-component.componen
 import { NodeTemplateComponent } from './node-template/node-template.component';
 
 import { MainTemplateComponent } from './main-template.component';
+import { CypherMenuTemplateComponent } from './cypher-menu-template/cypher-menu-template.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MainTemplateComponent } from './main-template.component';
     HeaderComponent,
     FooterComponent,
     MainComponentComponent,
-    NodeTemplateComponent
+    NodeTemplateComponent,
+    CypherMenuTemplateComponent
   ],
   imports: [
     CommonModule,

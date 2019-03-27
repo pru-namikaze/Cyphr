@@ -1,0 +1,24 @@
+<div class="jumbotron container d-inline-block rounded shadow translate-center">
+  <table>
+    <tr>
+      <td>
+        <h1>CypherMenu</h1>
+      </td>
+      <td>
+        <button type="button" class="btn btn-secondary">Close</button>
+      </td>
+    </tr>
+    <br />
+    <tr>
+      <div *ngFor="let type of domainDataService.getTypeArray()">
+        <button class="btn btn-secondary my-2" type="button" disabled>{{type}}</button>
+        <br />
+        <button class="btn btn-secondary mr-1 mb-1" *ngFor="let cypher of domainDataService.getTypeCypherArray(type)">
+          {{cypher}}
+        </button>
+        <br />
+        <br />
+      </div>
+    </tr>
+  </table>
+</div>
