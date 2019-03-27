@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ import { Injectable } from '@angular/core';
 //   ]
 //   [4]: inputString: string;
 //   [5]: outputString: string;
+
 export class InfrastructureNodeListService {
   NodeList: Array<[number, string, string, [string, any], string, string]> = [];
 
@@ -22,7 +24,11 @@ export class InfrastructureNodeListService {
     this.NodeList.push([1, 'Transform', 'Encode', ['Text Transform', []], 'Input String', 'Output String']);
     this.NodeList.push([2, 'View', null, ['Text', null], 'Input String', null]);
   }
+  getNodeList(): Observable<Array<[number, string, string, [string, any], string, string]>> {
+    return of(this.NodeList);
+  }
   AddNodeAtindex(newNode: [number, string, string, [string, any], string, string]) {
+    // tslint:disable-next-line: prefer-const
     for (let node of this.NodeList) {
       if (node[0] >= newNode[0]) {
         node[0]++;
@@ -31,6 +37,7 @@ export class InfrastructureNodeListService {
     this.NodeList.splice(newNode[0], 0, newNode);
   }
   RemoveNodeAtindex(index: number) {
+    // tslint:disable-next-line: prefer-const
     for (let node of this.NodeList) {
       if (node[0] > index) {
         node[0]--;

@@ -1,4 +1,4 @@
-<div class="rounded border shadow dimension-dialog-box p-4">
+<div class="rounded border shadow dimension-dialog-box p-4 translate-node-center">
   <table>
     <tr>
       <td class="font-family-lucida-console-monaco-monospace" *ngIf="infrastructureNodeList.NodeList[id][2]">
@@ -51,6 +51,6 @@
     </tr>
   </table>
 </div>
-<button class="btn btn-secondary my-5" type="button" (click)="infrastructureNodeList.AddNodeAtindex([1, 'Transform', 'Encode', ['Text Transform', []], 'Input String', 'Output String'])">
+<button class="btn btn-secondary my-5 translate-plus-icon-center" type="button" (click)="infrastructureNodeList.AddNodeAtindex([1, 'Transform', 'Encode', ['Text Transform', []], 'Input String', 'Output String'])">
   <span class="fas fa-plus"></span>
 </button>

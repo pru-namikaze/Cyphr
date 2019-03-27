@@ -13,7 +13,12 @@ body
 {
   background-color: #a9a9a9;
 }
-.transform-translateX-50vw
+.translate-node-center
 {
-  transform: translateX(50vw);
+  transform: translateX(37.5vw);
+}
+.translate-plus-icon-center
+{
+  width: 2vw;
+  transform: translateX(49vw);
 }

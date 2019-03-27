@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { DomainDataService } from '../../services/domain-data.service';
 import { InfrastructureNodeListService } from '../../services/infrastructure-node-list.service';
 import { CommonService } from '../../services/common.service';
@@ -12,18 +12,13 @@ import { CommonService } from '../../services/common.service';
 export class NodeTemplateComponent implements OnInit {
 
   @Input() id: number;
+  // @Output() updateMaincomponent = new EventEmitter<boolean>();
 
-  domainDataService: DomainDataService;
-  infrastructureNodeList: InfrastructureNodeListService;
-  common: CommonService;
-
-  constructor() {
+  // tslint:disable-next-line: max-line-length
+  constructor(public domainDataService: DomainDataService, public infrastructureNodeList: InfrastructureNodeListService, public common: CommonService) {
   }
 
   ngOnInit() {
-    this.domainDataService = new DomainDataService();
-    this.infrastructureNodeList = new InfrastructureNodeListService();
-    this.common = new CommonService();
   }
 
   selectencodeDecodeOptionClick(option: string): void {
