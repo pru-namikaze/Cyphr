@@ -18,6 +18,6 @@ export class MainComponentComponent implements OnInit {
   ngOnInit() {
   }
   getNodelist(): void {
-    this.infrastructureNodeList.getNodeList().subscribe( NodeList => this.nodeList = NodeList);
+    this.infrastructureNodeList.getNodeList().subscribe( NodeList => this.NodeList = NodeList);
   }
 }

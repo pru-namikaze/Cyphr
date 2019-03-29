@@ -1,23 +1,25 @@
-<div class="jumbotron container d-inline-block rounded shadow translate-center">
+<div class="overlap-fullscreen opacity-0_6 bg-black" *ngIf="infrastructureNodeList.showCypherMenu" (click)="CypherMenuClickEventListner($event.target)"></div>
+
+<div class="translate-menu-center d-inline-block bg-white p-3 font-family-lucida-console-monaco-monospace"
+id="CypherMenu" *ngIf="infrastructureNodeList.showCypherMenu" (click)="CypherMenuClickEventListner($event.target)">
   <table>
     <tr>
       <td>
         <h1>CypherMenu</h1>
       </td>
       <td>
-        <button type="button" class="btn btn-secondary">Close</button>
+        <button type=" button" class="btn btn-secondary" (click)="HideCypherMenu()">Close</button>
       </td>
     </tr>
-    <br />
     <tr>
       <div *ngFor="let type of domainDataService.getTypeArray()">
+        <hr />
         <button class="btn btn-secondary my-2" type="button" disabled>{{type}}</button>
         <br />
-        <button class="btn btn-secondary mr-1 mb-1" *ngFor="let cypher of domainDataService.getTypeCypherArray(type)">
+        <button class="btn btn-secondary mr-1 mb-1" *ngFor="let cypher of domainDataService.getTypeCypherArray(type)"
+          (click)="AddNodeToNodeList(type, cypher)">
           {{cypher}}
         </button>
-        <br />
-        <br />
       </div>
     </tr>
   </table>

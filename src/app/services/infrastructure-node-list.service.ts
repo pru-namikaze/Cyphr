@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 
+import { CommonService } from './common.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,13 +19,20 @@ import { of, Observable } from 'rxjs';
 //   [5]: outputString: string;
 
 export class InfrastructureNodeListService {
-  NodeList: Array<[number, string, string, [string, any], string, string]> = [];
-  
 
-  constructor() {
-    this.NodeList.push([0, 'View', null, ['Text', null], 'Input String', null]);
-    this.NodeList.push([1, 'Transform', 'Encode', ['Text Transform', []], 'Input String', 'Output String']);
-    this.NodeList.push([2, 'View', null, ['Text', null], 'Input String', null]);
+  NodeList: Array<[number, string, string, [string, any], string, string]>;
+  selectedPlusIndex: number;
+  showCypherMenu: boolean;
+
+  constructor(public common: CommonService) {
+    this.NodeList = [];
+    this.NodeList.push([0, 'View', null, ['Text', common.getDefaultConfiguration('View', 'Text')], 'Input String', null]);
+    // tslint:disable-next-line: max-line-length
+    this.NodeList.push([1, 'Transform', common.encodeDecodeOptions[0], ['Text Transform', common.getDefaultConfiguration('Transform', 'Text Transform')], 'Input String', 'Output String']);
+    this.NodeList.push([2, 'View', null, ['Text', common.getDefaultConfiguration('View', 'Text')], 'Input String', null]);
+
+    this.selectedPlusIndex = null;
+    this.showCypherMenu = false;
   }
   getNodeList(): Observable<Array<[number, string, string, [string, any], string, string]>> {
     return of(this.NodeList);

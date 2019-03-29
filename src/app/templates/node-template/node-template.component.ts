@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { DomainDataService } from '../../services/domain-data.service';
 import { InfrastructureNodeListService } from '../../services/infrastructure-node-list.service';
 import { CommonService } from '../../services/common.service';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-node-template',
@@ -24,9 +25,14 @@ export class NodeTemplateComponent implements OnInit {
   selectencodeDecodeOptionClick(option: string): void {
     this.infrastructureNodeList.NodeList[this.id][2] = option;
   }
-  selectOptionClick(cypherName: string): void {
-    this.infrastructureNodeList.NodeList[this.id][3][0] = cypherName;
-    this.infrastructureNodeList.NodeList[this.id][3][1] = this.common.getDefaultConfiguration(cypherName);
+  selectOptionClick(type: string, cypher: string): void {
+    this.infrastructureNodeList.NodeList[this.id][3][0] = cypher;
+    this.infrastructureNodeList.NodeList[this.id][3][1] = this.common.getDefaultConfiguration(type, cypher);
   }
-}
+  ShowCypherMenu(menuIndex: number) {
+    document.getElementsByTagName('body')[0].style.cssText = 'margin: 0; height: 100%; overflow: hidden';
+    this.infrastructureNodeList.selectedPlusIndex = menuIndex;
+    this.infrastructureNodeList.showCypherMenu = true;
+  }
 
+}
