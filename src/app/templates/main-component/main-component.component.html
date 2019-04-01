@@ -1,4 +1,8 @@
 
 <app-cypher-menu-template></app-cypher-menu-template>
 
+<button class="btn btn-secondary my-5 translate-plus-icon-center" type="button"
+  (click)="infrastructureNodeList.ShowCypherMenu()">
+  <span class="fas fa-plus"></span>
+</button>
 <app-node-template class="mx-5" *ngFor="let node of infrastructureNodeList.NodeList" [id]=[node[0]]></app-node-template>

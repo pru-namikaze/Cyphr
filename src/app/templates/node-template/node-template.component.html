@@ -1,7 +1,7 @@
 <div class="rounded border shadow dimension-dialog-box p-4 translate-node-center">
   <table>
     <tr>
-      <td class="font-family-lucida-console-monaco-monospace-2em" *ngIf="infrastructureNodeList.NodeList[id][2]">
+      <td class="font-family-lucida-console-monaco-monospace" *ngIf="infrastructureNodeList.NodeList[id][2]">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
             {{infrastructureNodeList.NodeList[id][2]}}
@@ -11,7 +11,11 @@
               (click)="selectencodeDecodeOptionClick(option)">{{option}}</button>
           </div>
         </div>
+      </td>
       <td>
+        <button class="btn btn-secondary position-close-btn" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)"> X
+        </button>
+      </td>
     </tr>
     <br />
     <tr>
@@ -51,7 +55,8 @@
     </tr>
   </table>
 </div>
-<!-- infrastructureNodeList.AddNodeAtindex([(infrastructureNodeList.NodeList[id][0]+1), 'Transform', 'Encode', ['Text Transform', []], 'Input String', 'Output String']) -->
-<button class="btn btn-secondary my-5 translate-plus-icon-center" type="button" (click)="ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)">
+
+<button class="btn btn-secondary my-5 translate-plus-icon-center" type="button"
+  (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)">
   <span class="fas fa-plus"></span>
 </button>

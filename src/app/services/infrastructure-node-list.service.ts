@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 
 import { CommonService } from './common.service';
+import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -59,4 +60,10 @@ export class InfrastructureNodeListService {
     this.NodeList.splice(UpdatedNode[0], 1, UpdatedNode);
   }
 
+  ShowCypherMenu(menuIndex?: number) {
+    document.getElementsByTagName('body')[0].style.cssText = 'margin: 0; height: 100%; overflow: hidden';
+
+    this.selectedPlusIndex = isUndefined(menuIndex) ? 0 : menuIndex;
+    this.showCypherMenu = true;
+  }
 }

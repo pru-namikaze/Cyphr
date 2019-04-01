@@ -69,3 +69,9 @@ body
   overflow-x: hidden;
   margin-bottom: -1em;
 }
+.position-close-btn
+{
+  position: absolute;
+  right: 1vw;
+  top: 1.5rem;
+}
