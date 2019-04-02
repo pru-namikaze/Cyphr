@@ -7,7 +7,7 @@ import { isUndefined } from 'util';
 })
 export class DomainDataService {
 
-  domainDataDictionary: Array<[string, string, Array<[string, string]>]>;
+  domainDataDictionary: Array<[string, string, Array<[string, string, any]>]>;
 
   constructor() {
     this.domainDataDictionary = DomainDataDictionary;

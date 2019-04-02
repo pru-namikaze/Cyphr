@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { DomainDataService } from '../../services/domain-data.service';
 import { InfrastructureNodeListService } from '../../services/infrastructure-node-list.service';
 import { CommonService } from '../../services/common.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-node-template',
@@ -18,14 +19,6 @@ export class NodeTemplateComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  selectencodeDecodeOptionClick(option: string): void {
-    this.infrastructureNodeList.NodeList[this.id][2] = option;
-  }
-  selectOptionClick(type: string, cypher: string): void {
-    this.infrastructureNodeList.NodeList[this.id][3][0] = cypher;
-    this.infrastructureNodeList.NodeList[this.id][3][1] = this.common.getDefaultConfiguration(type, cypher);
   }
 
   TextareaInputChangeEventListener() {

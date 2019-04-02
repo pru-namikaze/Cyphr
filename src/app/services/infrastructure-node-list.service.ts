@@ -25,6 +25,7 @@ export class InfrastructureNodeListService {
   selectedPlusIndex: number;
   showCypherMenu: boolean;
   pageYOffset: number;
+  modifyCurrentFlag: boolean;
 
   constructor(public common: CommonService) {
     this.NodeList = [];
@@ -35,6 +36,8 @@ export class InfrastructureNodeListService {
 
     this.selectedPlusIndex = null;
     this.showCypherMenu = false;
+    this.pageYOffset = 0;
+    this.modifyCurrentFlag = false;
   }
   getNodeList(): Observable<Array<[number, string, string, [string, any], string, string]>> {
     return of(this.NodeList);
@@ -47,6 +50,7 @@ export class InfrastructureNodeListService {
       }
     }
     this.NodeList.splice(newNode[0], 0, newNode);
+
   }
   RemoveNodeAtindex(index: number) {
     // tslint:disable-next-line: prefer-const
@@ -57,15 +61,13 @@ export class InfrastructureNodeListService {
     }
     this.NodeList.splice(index, 1);
   }
-  UpdateNodeAtindex(UpdatedNode: [number, string, string, [string, any], string, string]) {
-    this.NodeList.splice(UpdatedNode[0], 1, UpdatedNode);
-  }
 
-  ShowCypherMenu(menuIndex?: number) {
+  ShowCypherMenu(menuIndex?: number, modifyCurrentFlag?: boolean) {
     this.pageYOffset = window.pageYOffset;
     window.scrollTo(0, 0);
     document.getElementsByTagName('body')[0].style.cssText = 'margin: 0; height: 100%; overflow: hidden';
 
+    this.modifyCurrentFlag = isUndefined(modifyCurrentFlag) ? this.modifyCurrentFlag : modifyCurrentFlag;
     this.selectedPlusIndex = isUndefined(menuIndex) ? 0 : menuIndex;
     this.showCypherMenu = true;
   }
@@ -78,7 +80,7 @@ export class InfrastructureNodeListService {
   }
   AddNodeToNodeList(type: string, cypher: string): void {
     // TODO: using nested switch to below initilization;
-    this.AddNodeAtindex([
+    const newNode: [number, string, string, [string, any], string, string] = [
       this.selectedPlusIndex,
       type,
       ((type === 'View') && (cypher === 'Text')) ? null : this.common.encodeDecodeOptions[0],
@@ -88,13 +90,41 @@ export class InfrastructureNodeListService {
       ],
       'Input String',
       'Output String'
-    ]);
+    ];
+    this.UpdateNode(newNode, this.selectedPlusIndex);
+
+
     this.HideCypherMenu();
   }
+  
+  UpdateNode(newNode: [number, string, string, [string, any], string, string], index: number): void {
+    this.AddNodeAtindex(newNode);
+    console.log(this.NodeList);
+    if (this.modifyCurrentFlag) {
+      this.RemoveNodeAtindex(index - 1);
+      console.log(index);
+      this.modifyCurrentFlag = false;
+    }
+  }
+
+  selectOptionClick(type: string, cypher: string, id: number): void {
+    const newNode: [number, string, string, [string, any], string, string] = this.NodeList[id];
+
+    newNode[3][0] = cypher;
+    newNode[3][1] = this.common.getDefaultConfiguration(type, cypher);
+
+    this.modifyCurrentFlag = true;
+    this.UpdateNode(newNode, id + 1);
+  }
+
   CypherMenuClickEventListner(eventtarget: any): void {
     if (!(document.getElementById('CypherMenu').contains(eventtarget))) {
       this.HideCypherMenu();
     }
+  }
+
+  selectencodeDecodeOptionClick(option: string, id: number): void {
+    this.NodeList[id][2] = option;
   }
 
 }

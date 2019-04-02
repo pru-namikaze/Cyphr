@@ -1,0 +1,113 @@
+<div [ngSwitch]="infrastructureNodeList.NodeList[id][1]">
+
+  <div *ngSwitchCase="'View'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
+
+    <div *ngSwitchCase="'Text'">
+    </div>
+
+    <div *ngSwitchCase="'Bytes'">
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="'Transform'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
+
+    <div *ngSwitchCase="'Text Transform'">
+      Text Transform
+    </div>
+
+    <div *ngSwitchCase="'Numeral System'">
+      Numeral System
+    </div>
+
+    <div *ngSwitchCase="'Bitwise Opertion'">
+      Bitwise Opertion
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="'Alphabets'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
+
+    <div *ngSwitchCase="'Morse Code'">
+      Morse Code
+    </div>
+
+    <div *ngSwitchCase="'Spelling Alphabet'">
+      Spelling Alphabet
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="'Substitution Cipher'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
+
+    <div *ngSwitchCase="'Alphabetical Substitution'">
+      Alphabetical Substitution
+    </div>
+
+    <div *ngSwitchCase="'ROT13'">
+      ROT13
+    </div>
+
+    <div *ngSwitchCase="'Affine Cipher'">
+      Affine Cipher
+    </div>
+
+    <div *ngSwitchCase="'Caesar Cipher'">
+      Caesar Cipher
+    </div>
+
+    <div *ngSwitchCase="'Atbash'">
+      Atbash
+    </div>
+
+    <div *ngSwitchCase="'Vigenère Cipher'">
+      Vigenère Cipher
+    </div>
+
+    <div *ngSwitchCase="'Enigma Machine'">
+      Enigma Machine
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="'Encoding'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
+
+    <div *ngSwitchCase="'Base64'">
+      Base64
+    </div>
+
+    <div *ngSwitchCase="'Ascii85'">
+      Ascii85
+    </div>
+
+    <div *ngSwitchCase="'URL Encoding'">
+      URL Encoding
+    </div>
+
+    <div *ngSwitchCase="'Unicode Code Points'">
+      Unicode Code Points
+    </div>
+
+    <div *ngSwitchCase="'Integer'">
+      Integer
+    </div>
+
+  </div>
+
+  <div *ngSwitchCase="'Modern Cryptography'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
+
+    <div *ngSwitchCase="'Block Cipher'">
+      Block Cipher
+    </div>
+
+    <div *ngSwitchCase="'Hash Function'">
+      Hash Function
+    </div>
+
+    <div *ngSwitchCase="'HMAC'">
+      HMAC
+    </div>
+
+  </div>
+
+</div>

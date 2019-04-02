@@ -11,6 +11,7 @@ import { NodeTemplateComponent } from './node-template/node-template.component';
 
 import { MainTemplateComponent } from './main-template.component';
 import { CypherMenuTemplateComponent } from './cypher-menu-template/cypher-menu-template.component';
+import { CypherOptionTemplateComponent } from './cypher-option-template/cypher-option-template.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CypherMenuTemplateComponent } from './cypher-menu-template/cypher-menu-
     FooterComponent,
     MainComponentComponent,
     NodeTemplateComponent,
-    CypherMenuTemplateComponent
+    CypherMenuTemplateComponent,
+    CypherOptionTemplateComponent
   ],
   imports: [
     CommonModule,

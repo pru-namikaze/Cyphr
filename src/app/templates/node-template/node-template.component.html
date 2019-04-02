@@ -1,6 +1,7 @@
 <div class="rounded border shadow dimension-dialog-box p-4 translate-node-center">
   <table>
     <tr>
+      <!-- Dropdown for Encode/ Decode. -->
       <td class="font-family-lucida-console-monaco-monospace" *ngIf="infrastructureNodeList.NodeList[id][2]">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -8,10 +9,11 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button" *ngFor="let option of common.encodeDecodeOptions"
-              (click)="selectencodeDecodeOptionClick(option)">{{option}}</button>
+              (click)="infrastructureNodeList.selectencodeDecodeOptionClick(option, id)">{{option}}</button>
           </div>
         </div>
       </td>
+      <!-- Button for Removin the node from the Encoding Decoding Stream. -->
       <td>
         <button class="btn btn-secondary position-close-btn" type="button"
           (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
@@ -21,31 +23,34 @@
     </tr>
     <br />
     <tr>
+      <!-- Cypher Type -->
       <td class="font-family-lucida-console-monaco-monospace-2em">
         {{infrastructureNodeList.NodeList[id][1]}}
       </td>
     </tr>
     <br />
     <tr>
+      <!-- Cypher Name -->
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
           {{infrastructureNodeList.NodeList[id][3][0]}}
         </button>
         <div class="dropdown-menu">
           <button class="dropdown-item" type="button"
-            (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)">
+            (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)">
             Other Cyphers</button>
             <hr />
           <button class="dropdown-item" type="button"
             *ngFor="let option of domainDataService.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
-            (click)="selectOptionClick(option)">{{option}}</button>
+            (click)="infrastructureNodeList.selectOptionClick(infrastructureNodeList.NodeList[id][1],option, id[0])">{{option}}</button>
         </div>
       </div>
     </tr>
     <br />
     <tr>
-      <td *ngIf="infrastructureNodeList.NodeList[id][2]">
-        // TODO: Add options for the Dialog options.
+      <td>
+        <!-- Cypher Options -->
+        <app-cypher-option [id]=[id]></app-cypher-option>
       </td>
     </tr>
     <tr>
