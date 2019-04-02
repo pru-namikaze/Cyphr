@@ -13,7 +13,9 @@
         </div>
       </td>
       <td>
-        <button class="btn btn-secondary position-close-btn" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)"> X
+        <button class="btn btn-secondary position-close-btn" type="button"
+          (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
+          X
         </button>
       </td>
     </tr>
@@ -27,9 +29,13 @@
     <tr>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-          {{infrastructureNodeList.NodeList[this.id][3][0]}}
+          {{infrastructureNodeList.NodeList[id][3][0]}}
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <div class="dropdown-menu">
+          <button class="dropdown-item" type="button"
+            (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)">
+            Other Cyphers</button>
+            <hr />
           <button class="dropdown-item" type="button"
             *ngFor="let option of domainDataService.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
             (click)="selectOptionClick(option)">{{option}}</button>

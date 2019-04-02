@@ -17,28 +17,4 @@ export class CypherMenuTemplateComponent implements OnInit {
   ngOnInit() {
   }
 
-  HideCypherMenu(): void {
-    document.getElementsByTagName('body')[0].style.cssText = '';
-    this.infrastructureNodeList.showCypherMenu = false;
-  }
-  AddNodeToNodeList(type: string, cypher: string): void {
-    // TODO: using nested switch to below initilization;
-    this.infrastructureNodeList.AddNodeAtindex([
-      this.infrastructureNodeList.selectedPlusIndex,
-      type,
-      ((type === 'View') && (cypher === 'Text')) ? null : this.common.encodeDecodeOptions[0],
-      [
-        cypher,
-        this.common.getDefaultConfiguration(type, cypher)
-      ],
-      'Input String',
-      'Output String'
-    ]);
-    this.HideCypherMenu();
-  }
-  CypherMenuClickEventListner(eventtarget: any): void {
-    if (!(document.getElementById('CypherMenu').contains(eventtarget))) {
-      this.HideCypherMenu();
-    }
-  }
 }

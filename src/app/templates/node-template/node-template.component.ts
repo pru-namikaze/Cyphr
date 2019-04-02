@@ -12,7 +12,7 @@ import { CommonService } from '../../services/common.service';
 export class NodeTemplateComponent implements OnInit {
 
   @Input() id: number;
-  
+
   // tslint:disable-next-line: max-line-length
   constructor(public domainDataService: DomainDataService, public infrastructureNodeList: InfrastructureNodeListService, public common: CommonService) {
   }
@@ -28,5 +28,8 @@ export class NodeTemplateComponent implements OnInit {
     this.infrastructureNodeList.NodeList[this.id][3][1] = this.common.getDefaultConfiguration(type, cypher);
   }
 
+  TextareaInputChangeEventListener() {
+    console.log('TextareaInputChangeEventListener');
+  }
 
 }
