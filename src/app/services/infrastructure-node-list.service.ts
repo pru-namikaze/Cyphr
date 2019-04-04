@@ -96,13 +96,12 @@ export class InfrastructureNodeListService {
 
     this.HideCypherMenu();
   }
-  
+
   UpdateNode(newNode: [number, string, string, [string, any], string, string], index: number): void {
     this.AddNodeAtindex(newNode);
-    console.log(this.NodeList);
+
     if (this.modifyCurrentFlag) {
       this.RemoveNodeAtindex(index - 1);
-      console.log(index);
       this.modifyCurrentFlag = false;
     }
   }
