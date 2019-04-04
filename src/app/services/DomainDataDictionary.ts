@@ -117,15 +117,13 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              'Convert To',
               [
-                'Convert To',
-                [
-                  'Decimal',
-                  'Binary',
-                  'Octal',
-                  'Hexadecimal',
-                  'Roman Numerals'
-                ]
+                'Decimal',
+                'Binary',
+                'Octal',
+                'Hexadecimal',
+                'Roman Numerals'
               ]
             ]
           ]
@@ -155,6 +153,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
       'Alphabets',
       'AlphabetsDescription', [
         [
+          // TODO: Adding the code for Timming Options
           'Morse Code',
           'Morse Code Description',
           [

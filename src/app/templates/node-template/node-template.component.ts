@@ -20,8 +20,5 @@ export class NodeTemplateComponent implements OnInit {
   ngOnInit() {
   }
 
-  TextareaInputChangeEventListener() {
-    console.log('TextareaInputChangeEventListener');
-  }
 
 }

@@ -28,4 +28,12 @@ export class CypherOptionTemplateComponent implements OnInit {
     return false;
   }
 
+  getCypherOptionValueFromNodeList(NodeListOptionValueArray: Array<[string, string]>, filterOption: string): string {
+    for (const option of NodeListOptionValueArray) {
+      if ( option[0] === filterOption) {
+        return option[1];
+      }
+    }
+    return null;
+  }
 }

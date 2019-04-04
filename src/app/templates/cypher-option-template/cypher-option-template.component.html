@@ -4,7 +4,7 @@
   <br />
 
   <div *ngSwitchCase="'1'">
-    <input type="text" placeholder={{options[1][0]}} />
+    <input type="text" [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" />
   </div>
 
   <div *ngSwitchCase="'2'">
@@ -12,7 +12,7 @@
       <div class="input-group-prepend">
         <button class="btn btn-secondary" type="button">&nbsp; - &nbsp;</button>
       </div>
-      <input type="text" placeholder={{options[1][0]}} />
+      <input type="text" [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" />
       <div class="input-group-append">
         <button class="btn btn-secondary" type="button">&nbsp; + &nbsp;</button>
       </div>
@@ -20,7 +20,7 @@
 
     <div class="dropdown" *ngIf="!isInputRange(options[1])">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-        {{options[1][0]}}
+          {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <button class="dropdown-item" type="button" *ngFor="let option of options[1]">{{option}}</button>
@@ -30,8 +30,8 @@
 
   <div class="dropdown" *ngSwitchDefault>
     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-      {{options[1][0]}}
-    </button>
+        {{getcypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}
+      </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
       <button class="dropdown-item" type="button" *ngFor="let option of options[1]">{{option}}</button>
     </div>
