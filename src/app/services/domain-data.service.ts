@@ -8,20 +8,20 @@ import { isUndefined } from 'util';
 export class DomainDataService {
 
   domainDataDictionary: Array<[string, string, Array<[string, string, any]>]>;
+  encodeDecodeOptions: string[];
+
 
   constructor() {
     this.domainDataDictionary = DomainDataDictionary;
+    this.encodeDecodeOptions = ['Encode', 'Decode'];
   }
+
   // Make it Level 2 Generic.
-  getValue(array: any, key: string, key2?: string): any {
+  getValue(array: any, key: string): any {
     let valueArray: any[] = [];
-    for (let element of array) {
+    for (const element of array) {
       if (element[0] === key) {
-        if (isUndefined(key2)) {
-          return element;
-        } else {
-          return this.getValue(element, key);
-        }
+        return element;
       }
     }
     return null;
@@ -29,29 +29,42 @@ export class DomainDataService {
 
   getTypeArray(): string[] {
     let typeArray: string[] = [];
-    for (let element of this.domainDataDictionary) {
+    for (const element of this.domainDataDictionary) {
       typeArray.push(element[0].toString());
     }
     return typeArray;
   }
 
   getTypeDescripion(type: string): string {
-    let element: [string, string, Array<[string, string]>] = this.getValue(this.domainDataDictionary, type);
+    const element: [string, string, Array<[string, string]>] = this.getValue(this.domainDataDictionary, type);
     return element[1];
   }
 
   getTypeCypherArray(type: string): string[] {
     let TypeCypherArray: string[] = [];
-    let element: [string, string, Array<[string, string]>] = this.getValue(this.domainDataDictionary, type);
-    for (let item of element[2]) {
+    const element: [string, string, Array<[string, string]>] = this.getValue(this.domainDataDictionary, type);
+    for (const item of element[2]) {
       TypeCypherArray.push(item[0]);
     }
     return TypeCypherArray;
   }
 
-  getTypeDescription(type: string, cypherName: string) {
-    let cypher: [string, string] = this.getValue(this.domainDataDictionary, type, cypherName);
+  getCypherNameDescription(cypherType: string, cypherName: string): string {
+    const type: [string, string, Array<[string, string, any]>] = this.getValue(this.domainDataDictionary, cypherType);
+    const cypher: [string, string, any] = this.getValue(type[2], cypherName);
     return cypher[1];
   }
 
+  getCypherOptions(cypherType: string, cypherName: string): any {
+    const type: [string, string, Array<[string, string, any]>] = this.getValue(this.domainDataDictionary, cypherType);
+    const cypher: [string, string, any] = this.getValue(type[2], cypherName);
+    return cypher[2];
+  }
+  getDefaultConfiguration(type: string, cypher: string): any {
+    // TODO: Work on it to give default configuration of the cypher
+    if ((!isUndefined(type) && !isUndefined(cypher)) && ((type === 'View') && (cypher === 'Text'))) {
+      return null;
+    }
+    return [];
+  }
 }

@@ -1,113 +1,40 @@
-<div [ngSwitch]="infrastructureNodeList.NodeList[id][1]">
+<div *ngFor="let options of cypherOptions" [ngSwitch]="options[1].length.toString()">
+  <hr />
+  {{options[0]}}
+  <br />
 
-  <div *ngSwitchCase="'View'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
-
-    <div *ngSwitchCase="'Text'">
-    </div>
-
-    <div *ngSwitchCase="'Bytes'">
-    </div>
-
+  <div *ngSwitchCase="'1'">
+    <input type="text" placeholder={{options[1][0]}} />
   </div>
 
-  <div *ngSwitchCase="'Transform'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
-
-    <div *ngSwitchCase="'Text Transform'">
-      Text Transform
+  <div *ngSwitchCase="'2'">
+    <div class="input-group" *ngIf="isInputRange(options[1])">
+      <div class="input-group-prepend">
+        <button class="btn btn-secondary" type="button">&nbsp; - &nbsp;</button>
+      </div>
+      <input type="text" placeholder={{options[1][0]}} />
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="button">&nbsp; + &nbsp;</button>
+      </div>
     </div>
 
-    <div *ngSwitchCase="'Numeral System'">
-      Numeral System
+    <div class="dropdown" *ngIf="!isInputRange(options[1])">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+        {{options[1][0]}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" *ngFor="let option of options[1]">{{option}}</button>
+      </div>
     </div>
-
-    <div *ngSwitchCase="'Bitwise Opertion'">
-      Bitwise Opertion
-    </div>
-
   </div>
 
-  <div *ngSwitchCase="'Alphabets'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
-
-    <div *ngSwitchCase="'Morse Code'">
-      Morse Code
+  <div class="dropdown" *ngSwitchDefault>
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+      {{options[1][0]}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button" *ngFor="let option of options[1]">{{option}}</button>
     </div>
-
-    <div *ngSwitchCase="'Spelling Alphabet'">
-      Spelling Alphabet
-    </div>
-
-  </div>
-
-  <div *ngSwitchCase="'Substitution Cipher'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
-
-    <div *ngSwitchCase="'Alphabetical Substitution'">
-      Alphabetical Substitution
-    </div>
-
-    <div *ngSwitchCase="'ROT13'">
-      ROT13
-    </div>
-
-    <div *ngSwitchCase="'Affine Cipher'">
-      Affine Cipher
-    </div>
-
-    <div *ngSwitchCase="'Caesar Cipher'">
-      Caesar Cipher
-    </div>
-
-    <div *ngSwitchCase="'Atbash'">
-      Atbash
-    </div>
-
-    <div *ngSwitchCase="'Vigenère Cipher'">
-      Vigenère Cipher
-    </div>
-
-    <div *ngSwitchCase="'Enigma Machine'">
-      Enigma Machine
-    </div>
-
-  </div>
-
-  <div *ngSwitchCase="'Encoding'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
-
-    <div *ngSwitchCase="'Base64'">
-      Base64
-    </div>
-
-    <div *ngSwitchCase="'Ascii85'">
-      Ascii85
-    </div>
-
-    <div *ngSwitchCase="'URL Encoding'">
-      URL Encoding
-    </div>
-
-    <div *ngSwitchCase="'Unicode Code Points'">
-      Unicode Code Points
-    </div>
-
-    <div *ngSwitchCase="'Integer'">
-      Integer
-    </div>
-
-  </div>
-
-  <div *ngSwitchCase="'Modern Cryptography'" [ngSwitch]="infrastructureNodeList.NodeList[id][3][0]">
-
-    <div *ngSwitchCase="'Block Cipher'">
-      Block Cipher
-    </div>
-
-    <div *ngSwitchCase="'Hash Function'">
-      Hash Function
-    </div>
-
-    <div *ngSwitchCase="'HMAC'">
-      HMAC
-    </div>
-
   </div>
 
 </div>

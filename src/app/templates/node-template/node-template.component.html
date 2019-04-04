@@ -8,7 +8,7 @@
             {{infrastructureNodeList.NodeList[id][2]}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item" type="button" *ngFor="let option of common.encodeDecodeOptions"
+            <button class="dropdown-item" type="button" *ngFor="let option of domainData.encodeDecodeOptions"
               (click)="infrastructureNodeList.selectencodeDecodeOptionClick(option, id)">{{option}}</button>
           </div>
         </div>
@@ -41,7 +41,7 @@
             Other Cyphers</button>
             <hr />
           <button class="dropdown-item" type="button"
-            *ngFor="let option of domainDataService.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
+            *ngFor="let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
             (click)="infrastructureNodeList.selectOptionClick(infrastructureNodeList.NodeList[id][1],option, id[0])">{{option}}</button>
         </div>
       </div>

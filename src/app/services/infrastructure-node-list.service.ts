@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 
-import { CommonService } from './common.service';
+import { DomainDataService } from './domain-data.service';
 import { isUndefined } from 'util';
 
 @Injectable({
@@ -27,21 +27,23 @@ export class InfrastructureNodeListService {
   pageYOffset: number;
   modifyCurrentFlag: boolean;
 
-  constructor(public common: CommonService) {
+  constructor(public domainData: DomainDataService) {
     this.NodeList = [];
-    this.NodeList.push([0, 'View', null, ['Text', common.getDefaultConfiguration('View', 'Text')], 'Input String', null]);
+    this.NodeList.push([0, 'View', null, ['Text', domainData.getDefaultConfiguration('View', 'Text')], 'Input String', null]);
     // tslint:disable-next-line: max-line-length
-    this.NodeList.push([1, 'Transform', common.encodeDecodeOptions[0], ['Text Transform', common.getDefaultConfiguration('Transform', 'Text Transform')], 'Input String', 'Output String']);
-    this.NodeList.push([2, 'View', null, ['Text', common.getDefaultConfiguration('View', 'Text')], 'Input String', null]);
+    this.NodeList.push([1, 'Transform', domainData.encodeDecodeOptions[0], ['Text Transform', domainData.getDefaultConfiguration('Transform', 'Text Transform')], 'Input String', 'Output String']);
+    this.NodeList.push([2, 'View', null, ['Text', domainData.getDefaultConfiguration('View', 'Text')], 'Input String', null]);
 
     this.selectedPlusIndex = null;
     this.showCypherMenu = false;
     this.pageYOffset = 0;
     this.modifyCurrentFlag = false;
   }
+
   getNodeList(): Observable<Array<[number, string, string, [string, any], string, string]>> {
     return of(this.NodeList);
   }
+
   AddNodeAtindex(newNode: [number, string, string, [string, any], string, string]) {
     // tslint:disable-next-line: prefer-const
     for (let node of this.NodeList) {
@@ -52,6 +54,7 @@ export class InfrastructureNodeListService {
     this.NodeList.splice(newNode[0], 0, newNode);
 
   }
+
   RemoveNodeAtindex(index: number) {
     // tslint:disable-next-line: prefer-const
     for (let node of this.NodeList) {
@@ -83,10 +86,10 @@ export class InfrastructureNodeListService {
     const newNode: [number, string, string, [string, any], string, string] = [
       this.selectedPlusIndex,
       type,
-      ((type === 'View') && (cypher === 'Text')) ? null : this.common.encodeDecodeOptions[0],
+      ((type === 'View') && (cypher === 'Text')) ? null : this.domainData.encodeDecodeOptions[0],
       [
         cypher,
-        this.common.getDefaultConfiguration(type, cypher)
+        this.domainData.getDefaultConfiguration(type, cypher)
       ],
       'Input String',
       'Output String'
@@ -110,7 +113,7 @@ export class InfrastructureNodeListService {
     const newNode: [number, string, string, [string, any], string, string] = this.NodeList[id];
 
     newNode[3][0] = cypher;
-    newNode[3][1] = this.common.getDefaultConfiguration(type, cypher);
+    newNode[3][1] = this.domainData.getDefaultConfiguration(type, cypher);
 
     this.modifyCurrentFlag = true;
     this.UpdateNode(newNode, id + 1);
