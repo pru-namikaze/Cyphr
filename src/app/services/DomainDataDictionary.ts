@@ -6,6 +6,7 @@
 //       CypherOptions: string,
 //       CypherDescription: string,
 //       [
+//         OptionId: number,
 //         OptionName: string,
 //         [
 //            OptionValue1: string
@@ -40,7 +41,7 @@
 //   ]
 // ],
 //
-export let DomainDataDictionary: Array<[string, string, Array<[string, string, any]>]> =
+export let DomainDataDictionary: Array<[string, string, Array<[string, string, Array<[number, string, Array<string>]>]>]> =
   [
     [
       'View',
@@ -55,6 +56,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Bytes Description',
           [
             [
+              0,
               'Format',
               [
                 'Hexadecimal',
@@ -62,6 +64,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Group By',
               [
                 'Half Byte',
@@ -83,6 +86,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Text Transform Description',
           [
             [
+              0,
               ' Case',
               [
                 'None',
@@ -94,6 +98,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Arrangement',
               [
                 'None',
@@ -107,6 +112,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Numeral System Description',
           [
             [
+              0,
               'Read',
               [
                 'Decimal',
@@ -117,6 +123,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Convert To',
               [
                 'Decimal',
@@ -133,6 +140,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Bitwise Opertion Description',
           [
             [
+              0,
               'Operation',
               [
                 'NOT ( ~a ) ',
@@ -158,12 +166,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Morse Code Description',
           [
             [
+              0,
               'Varient',
               [
                 'English'
               ]
             ],
             [
+              1,
               'Representation',
               [
                 'Code',
@@ -171,18 +181,21 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              2,
               'Short',
               [
                 '.'
               ]
             ],
             [
+              3,
               'Long',
               [
                 '-'
               ]
             ],
             [
+              4,
               'Space',
               [
                 '/'
@@ -195,6 +208,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Spelling Alphabet Description',
           [
             [
+              0,
               'Alphabet',
               [
                 'NATO / ICAO Phonetic Alphabet',
@@ -216,18 +230,21 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Alphabetical Substitution Description',
           [
             [
+              0,
               'Plain Text',
               [
                 'abcdefghijklmnopqrstuvwxyz'
               ]
             ],
             [
+              1,
               'Cipher Text',
               [
                 'zyxwvutsrqponmlkjihgfedcba'
               ]
             ],
             [
+              2,
               'Case Sensitivity',
               [
                 'Yes',
@@ -235,6 +252,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              3,
               'Foreign characters',
               [
                 'Include',
@@ -248,6 +266,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'ROT13 Description',
           [
             [
+              0,
               'Variant',
               [
                 'ROT5 ( 0 - 9 )',
@@ -263,6 +282,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Affine Cipher Description',
           [
             [
+              0,
               'Slope / A',
               [
                 '1',
@@ -270,6 +290,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Intercept / B',
               [
                 '1',
@@ -277,12 +298,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              2,
               'Alphabet',
               [
                 'abcdefghijklmnopqrstuvwxyz'
               ]
             ],
             [
+              3,
               'Case Sensitive',
               [
                 'Yes',
@@ -290,6 +313,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              4,
               'Foreign Characters',
               [
                 'Included',
@@ -303,6 +327,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Caesar Cipher Description',
           [
             [
+              0,
               'Shift',
               [
                 '1',
@@ -310,12 +335,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Alphabet',
               [
                 'abcdefghijklmnopqrstuvwxyz'
               ]
             ],
             [
+              2,
               'Case Sensitive',
               [
                 'Yes',
@@ -323,6 +350,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              3,
               'Foreign Characters',
               [
                 'Include',
@@ -336,6 +364,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Atbash Description',
           [
             [
+              0,
               'Alphabet',
               [
                 'Latin Alphabet',
@@ -349,6 +378,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Vigenère Cipher Description',
           [
             [
+              0,
               'Variant',
               [
                 'Standard',
@@ -358,12 +388,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Alphabet',
               [
                 'abcdefghijklmnopqrstuvwxyz'
               ]
             ],
             [
+              2,
               'Case Sensitive',
               [
                 'Yes',
@@ -371,6 +403,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              3,
               'Foreign Characters',
               [
                 'Include',
@@ -397,6 +430,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Base64 Description',
           [
             [
+              0,
               'Variant',
               [
                 'Standard \'bsae64\' ( RFC3548 , RFC4648 )',
@@ -411,10 +445,13 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Ascii85',
           'Ascii85 Description',
           [
-            'Variant',
             [
-              'Original',
-              'Z85 ( Zero MQ )'
+              0,
+              'Variant',
+              [
+                'Original',
+                'Z85 ( Zero MQ )'
+              ]
             ]
           ]
         ],
@@ -428,12 +465,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Unicode Code Points Description',
           [
             [
+              0,
               'Seperator',
               [
                 ' '
               ]
             ],
             [
+              1,
               'Format',
               [
                 'Unicode Notation',
@@ -452,6 +491,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Integer Description',
           [
             [
+              2,
               'Format',
               [
                 'Binary',
@@ -461,6 +501,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              3,
               'Type',
               [
                 '8-Bit Unsigned Integer ( U8 )',
@@ -484,6 +525,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Block Cipher Description',
           [
             [
+              0,
               'Algorithm',
               [
                 'AES-128',
@@ -491,6 +533,7 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              1,
               'Mode',
               [
                 'CBC ( Cypher Block Chaining )',
@@ -498,12 +541,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
               ]
             ],
             [
+              2,
               'Key',
               [
                 '2b 7e 15 16 28 ae d2 a6 ab f7 15 88 09 cf 4f 3c'
               ]
             ],
             [
+              3,
               'IV',
               [
                 '00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f'
@@ -515,13 +560,16 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'Hash Function',
           'Hash Function Description',
           [
-            'Algorithm',
             [
-              'MD5',
-              'SHA-1',
-              'SHA-256',
-              'SHA-384',
-              'SHA-512'
+              0,
+              'Algorithm',
+              [
+                'MD5',
+                'SHA-1',
+                'SHA-256',
+                'SHA-384',
+                'SHA-512'
+              ]
             ]
           ]
         ],
@@ -530,12 +578,14 @@ export let DomainDataDictionary: Array<[string, string, Array<[string, string, a
           'HMAC Description',
           [
             [
+              1,
               'Key',
               [
                 '63 72 79 70 74 69 69'
               ]
             ],
             [
+              2,
               'Algorithm',
               [
                 'MD5',

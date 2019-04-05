@@ -7,7 +7,7 @@ import { isUndefined } from 'util';
 })
 export class DomainDataService {
 
-  domainDataDictionary: Array<[string, string, Array<[string, string, any]>]>;
+  domainDataDictionary: Array<[string, string, Array<[string, string, Array<[number, string, Array<string>]>]>]>;
   encodeDecodeOptions: string[];
 
 
@@ -50,30 +50,31 @@ export class DomainDataService {
   }
 
   getCypherNameDescription(cypherType: string, cypherName: string): string {
-    const type: [string, string, Array<[string, string, any]>] = this.getValue(this.domainDataDictionary, cypherType);
+    // tslint:disable-next-line: max-line-length
+    const type: [string, string, Array<[string, string, Array<[number, string, Array<string>]>]>] = this.getValue(this.domainDataDictionary, cypherType);
     const cypher: [string, string, any] = this.getValue(type[2], cypherName);
     return cypher[1];
   }
 
   getCypherOptions(cypherType: string, cypherName: string): any {
-    const type: [string, string, Array<[string, string, any]>] = this.getValue(this.domainDataDictionary, cypherType);
-    const cypher: [string, string, any] = this.getValue(type[2], cypherName);
+    // tslint:disable-next-line: max-line-length
+    const type: [string, string, Array<[string, string, Array<[number, string, Array<string>]>]>] = this.getValue(this.domainDataDictionary, cypherType);
+    const cypher: [string, string, Array<[number, string, Array<string>]>] = this.getValue(type[2], cypherName);
     return cypher[2];
   }
   getDefaultConfiguration(type: string, cypher: string): any {
     // TODO: Work on it to give default configuration of the cypher
-    const cypherOption: Array<[string, any]> = this.getCypherOptions(type, cypher);
-    let defaultCypherOptions: Array<[string, string]> = [];
+    const cypherOption: Array<[number, string, Array<string>]> = this.getCypherOptions(type, cypher);
+    let defaultCypherOptions: Array<[number, string, string]> = [];
 
     if (cypherOption === null) {
-      defaultCypherOptions = cypherOption;
+      defaultCypherOptions = null;
     } else {
       for (const option of cypherOption) {
 
-        defaultCypherOptions.push([option[0], option[1][0]]);
+        defaultCypherOptions.push([option[0], option[1], option[2][0]]);
       }
     }
-
     return defaultCypherOptions;
   }
 }

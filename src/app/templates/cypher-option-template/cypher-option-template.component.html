@@ -1,14 +1,14 @@
-<div *ngFor="let options of cypherOptions" [ngSwitch]="options[1].length.toString()">
+<div *ngFor="let options of cypherOptions" [ngSwitch]="options[2].length.toString()">
   <hr />
-  {{options[0]}}
+  {{options[1]}}
   <br />
 
   <div *ngSwitchCase="'1'">
-    <input type="text" [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" />
+    <input type="text" id="userInputTextBox" [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" (keypress)="infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])"/>
   </div>
 
   <div *ngSwitchCase="'2'">
-    <div class="input-group" *ngIf="isInputRange(options[1])">
+    <div class="input-group" *ngIf="isInputRange(options[2])">
       <div class="input-group-prepend">
         <button class="btn btn-secondary" type="button">&nbsp; - &nbsp;</button>
       </div>
@@ -18,22 +18,22 @@
       </div>
     </div>
 
-    <div class="dropdown" *ngIf="!isInputRange(options[1])">
+    <div class="dropdown" *ngIf="!isInputRange(options[2])">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
           {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button" *ngFor="let option of options[1]">{{option}}</button>
+        <button class="dropdown-item" type="button" *ngFor="let option of options[2]">{{option}}</button>
       </div>
     </div>
   </div>
 
   <div class="dropdown" *ngSwitchDefault>
     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-        {{getcypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}
+        {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}
       </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <button class="dropdown-item" type="button" *ngFor="let option of options[1]">{{option}}</button>
+      <button class="dropdown-item" type="button" *ngFor="let option of options[2]">{{option}}</button>
     </div>
   </div>
 
