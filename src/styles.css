@@ -68,10 +68,25 @@ body
   width: 100%;
   overflow-x: hidden;
   margin-bottom: -1em;
+  height: 20vh;
 }
 .position-close-btn
 {
   position: absolute;
   right: 1vw;
   top: 1.5rem;
+}
+.back-to-top-btn
+{
+  position: fixed;
+  right: 5vw;
+  bottom: 5vh;
+}
+.dimension-node-list
+{
+  min-height: 50vh;
+}
+.dimension-header
+{
+  height: 10vh;
 }

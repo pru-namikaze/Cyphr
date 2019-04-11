@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomainDataService } from '../../services/domain-data.service';
 import { InfrastructureNodeListService } from '../../services/infrastructure-node-list.service';
+import { Observable, fromEvent } from 'rxjs';
 
 
 @Component({
@@ -16,8 +17,12 @@ export class MainComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.addEventListener( 'scroll', (): void => {
+      this.infrastructureNodeList.ShowBackToTop();
+    } );
   }
   getNodelist(): void {
     this.infrastructureNodeList.getNodeList().subscribe( NodeList => this.NodeList = NodeList);
   }
+
 }

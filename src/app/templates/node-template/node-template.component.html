@@ -42,7 +42,7 @@
             <hr />
           <button class="dropdown-item" type="button"
             *ngFor="let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
-            (click)="infrastructureNodeList.selectOptionClick(infrastructureNodeList.NodeList[id][1],option, id[0])">{{option}}</button>
+            (click)="infrastructureNodeList.selectOptionClick(id, option)">{{option}}</button>
         </div>
       </div>
     </tr>
@@ -67,7 +67,9 @@
   </table>
 </div>
 
-<button class="btn btn-secondary my-5 translate-plus-icon-center" type="button"
-  (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)">
-  <span class="fas fa-plus"></span>
+<button class="btn btn-secondary my-5 translate-plus-icon-center" id="{{ id + '-node-list-conjuction' }}" type="button"
+  (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)"
+  (mouseover)="infrastructureNodeList.ArrowToPlus(id, true)"
+  (mouseout)="infrastructureNodeList.ArrowToPlus(id, false)">
+  <span class="fas fa-chevron-down"></span>
 </button>

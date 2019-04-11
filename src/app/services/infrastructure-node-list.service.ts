@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { of, Observable, fromEvent } from 'rxjs';
 
 import { DomainDataService } from './domain-data.service';
-import { isUndefined } from 'util';
+import { isUndefined, isNullOrUndefined, isNull } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,7 @@ export class InfrastructureNodeListService {
   showCypherMenu: boolean;
   pageYOffset: number;
   modifyCurrentFlag: boolean;
+  showBackToTopFlag: boolean;
 
   constructor(public domainData: DomainDataService) {
     this.NodeList = [];
@@ -38,13 +39,14 @@ export class InfrastructureNodeListService {
     this.showCypherMenu = false;
     this.pageYOffset = 0;
     this.modifyCurrentFlag = false;
+    this.showBackToTopFlag = false;
   }
 
   getNodeList(): Observable<Array<[number, string, string, [string, Array<[string, string]>], string, string]>> {
     return of(this.NodeList);
   }
 
-  AddNodeAtindex(newNode: [number, string, string, [string, Array<[string, string]>], string, string]) {
+  AddNodeAtindex(newNode: [number, string, string, [string, Array<[string, string]>], string, string]): void {
     // tslint:disable-next-line: prefer-const
     for (let node of this.NodeList) {
       if (node[0] >= newNode[0]) {
@@ -55,7 +57,7 @@ export class InfrastructureNodeListService {
 
   }
 
-  RemoveNodeAtindex(index: number) {
+  RemoveNodeAtindex(index: number): void {
     // tslint:disable-next-line: prefer-const
     for (let node of this.NodeList) {
       if (node[0] > index) {
@@ -63,11 +65,16 @@ export class InfrastructureNodeListService {
       }
     }
     this.NodeList.splice(index, 1);
+    console.log(this.NodeList);
   }
 
-  ShowCypherMenu(menuIndex?: number, modifyCurrentFlag?: boolean) {
+  WindowScrollTo(yOffset: number): void {
+    window.scrollTo(0, yOffset);
+  }
+
+  ShowCypherMenu(menuIndex?: number, modifyCurrentFlag?: boolean): void {
     this.pageYOffset = window.pageYOffset;
-    window.scrollTo(0, 0);
+    this.WindowScrollTo(0);
     document.getElementsByTagName('body')[0].style.cssText = 'margin: 0; height: 100%; overflow: hidden';
 
     this.modifyCurrentFlag = isUndefined(modifyCurrentFlag) ? this.modifyCurrentFlag : modifyCurrentFlag;
@@ -78,13 +85,13 @@ export class InfrastructureNodeListService {
   HideCypherMenu(): void {
     document.getElementsByTagName('body')[0].style.cssText = '';
     this.showCypherMenu = false;
-    window.scrollTo(0, this.pageYOffset);
+    this.WindowScrollTo( this.pageYOffset);
 
   }
-  AddNodeToNodeList(type: string, cypher: string): void {
-    // TODO: using nested switch to below initilization;
+  AddNodeToNodeList(type: string, cypher: string, id?: number): void {
+    const newNodeId: number = isNullOrUndefined(id) ? this.selectedPlusIndex : id;
     const newNode: [number, string, string, [string, Array<[string, string]>], string, string] = [
-      this.selectedPlusIndex,
+      newNodeId,
       type,
       ((type === 'View') && (cypher === 'Text')) ? null : this.domainData.encodeDecodeOptions[0],
       [
@@ -94,46 +101,40 @@ export class InfrastructureNodeListService {
       'Input String',
       'Output String'
     ];
-    this.UpdateNode(newNode, this.selectedPlusIndex);
 
+    this.AddNodeAtindex(newNode);
+
+    if (this.modifyCurrentFlag) {
+      this.RemoveNodeAtindex(newNodeId - 1);
+      this.modifyCurrentFlag = false;
+    }
 
     this.HideCypherMenu();
   }
 
-  UpdateNode(newNode: [number, string, string, [string, Array<[string, string]>], string, string], index: number): void {
-    this.AddNodeAtindex(newNode);
-
-    if (this.modifyCurrentFlag) {
-      this.RemoveNodeAtindex(index - 1);
-      this.modifyCurrentFlag = false;
-    }
-  }
-
-  selectOptionClick(type: string, cypher: string, id: number): void {
-    const newNode: [number, string, string, [string, Array<[string, string]>], string, string] = this.NodeList[id];
-
-    newNode[3][0] = cypher;
-    newNode[3][1] = this.domainData.getDefaultConfiguration(type, cypher);
-
-    this.modifyCurrentFlag = true;
-    this.UpdateNode(newNode, id + 1);
+  selectOptionClick(id: number, cypherName: string): void {
+    this.AddNodeToNodeList(this.NodeList[id][1], cypherName, id);
+    this.RemoveNodeAtindex(id + 1);
   }
 
   UpdateCypherOptionValueFromNodeList(id: number, filterOption: string): void {
+    const type: string = this.NodeList[id][1];
+    const cypher: string = this.NodeList[id][2];
+
     const newNode: [number, string, string, [string, Array<[string, string]>], string, string] = this.NodeList[id];
-
-    const CypherValue = (document.getElementById('userInputTextBox') as HTMLInputElement).value;
-    // this is not working fix it it is not updating the nodelist and thats causing the values to not update.
-    console.log(this.NodeList[id]);
-    for (let option of this.NodeList[id][3][1]) {
-      if (option[0] === filterOption) {
-        option[1] = CypherValue;
-
-        this.modifyCurrentFlag = true;
-        this.UpdateNode(newNode, id + 1);
-        console.log(this.NodeList);
+    if (!isNull(this.NodeList[id][3][1])) {
+      for (const option of this.NodeList[id][3][1]) {
+        if (option[0] === filterOption) {
+          option[1] = (document.getElementById((id + option[0]).toString()) as HTMLInputElement).value;
+        }
       }
+    } else {
+      return null;
     }
+    this.AddNodeAtindex(newNode);
+    this.RemoveNodeAtindex(id + 1);
+
+    console.log(this.NodeList);
   }
 
   CypherMenuClickEventListner(eventtarget: any): void {
@@ -146,4 +147,31 @@ export class InfrastructureNodeListService {
     this.NodeList[id][2] = option;
   }
 
+  ShowBackToTop(): void {
+    const scrollHeight: number = document.documentElement.scrollHeight;
+    const clientHeight: number = document.documentElement.clientHeight;
+    let btnBottomHeight: number = 5;
+
+    if ((pageYOffset >= scrollHeight - 1.2 * clientHeight) && (pageYOffset <= scrollHeight - clientHeight)) {
+      btnBottomHeight = ((5 * pageYOffset - 5 * scrollHeight + 6 * clientHeight) * 20 / clientHeight) + 5;
+    }
+
+    if (pageYOffset * 100 / document.documentElement.clientHeight > 200) {
+      (document.getElementById('back-to-top-btn') as HTMLDivElement).style.display = 'block';
+      (document.getElementById('back-to-top-btn') as HTMLDivElement).style.bottom = btnBottomHeight + 'vh';
+      this.showBackToTopFlag = true;
+    } else {
+      (document.getElementById('back-to-top-btn') as HTMLDivElement).style.display = 'none';
+      this.showBackToTopFlag = false;
+    }
+  }
+
+  ArrowToPlus(id: number, showFlag: boolean) {
+    if (showFlag) {
+      document.getElementById(id + '-node-list-conjuction').children[0].className = 'fas fa-plus';
+    } else {
+      document.getElementById(id + '-node-list-conjuction').children[0].className = 'fas fa-chevron-down';
+
+    }
+  }
 }

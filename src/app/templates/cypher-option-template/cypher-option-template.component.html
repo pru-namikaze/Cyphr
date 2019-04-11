@@ -4,7 +4,7 @@
   <br />
 
   <div *ngSwitchCase="'1'">
-    <input type="text" id="userInputTextBox" [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" (keypress)="infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])"/>
+    <input type="text" id="{{ id + options[1] }}" [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" (keypress)="infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])"/>
   </div>
 
   <div *ngSwitchCase="'2'">
@@ -36,5 +36,4 @@
       <button class="dropdown-item" type="button" *ngFor="let option of options[2]">{{option}}</button>
     </div>
   </div>
-
 </div>
