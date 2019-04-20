@@ -791,7 +791,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var CommonService = /** @class */ (function () {
     function CommonService() {
+        this.githubProfilePage = 'https://github.com/pru-namikaze';
+        this.githubRepositoryPage = 'https://github.com/pru-namikaze';
+        this.githubIssuePage = 'https://github.com/pru-namikaze/Cyphr/issues';
     }
+    CommonService.prototype.OpenWebPageInNewTab = function (link) {
+        window.open(link, '_blank');
+    };
     CommonService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
@@ -828,7 +834,6 @@ var DomainDataService = /** @class */ (function () {
     }
     // Make it Level 2 Generic.
     DomainDataService.prototype.getValue = function (array, key) {
-        var valueArray = [];
         for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
             var element = array_1[_i];
             if (element[0] === key) {
@@ -871,7 +876,6 @@ var DomainDataService = /** @class */ (function () {
         return cypher[2];
     };
     DomainDataService.prototype.getDefaultConfiguration = function (type, cypher) {
-        // TODO: Work on it to give default configuration of the cypher
         var cypherOption = this.getCypherOptions(type, cypher);
         var defaultCypherOptions = [];
         if (cypherOption === null) {
@@ -961,17 +965,9 @@ var InfrastructureNodeListService = /** @class */ (function () {
         window.scrollTo(0, yOffset);
     };
     InfrastructureNodeListService.prototype.ShowCypherMenu = function (menuIndex, modifyCurrentFlag) {
-        this.pageYOffset = window.pageYOffset;
-        this.WindowScrollTo(0);
-        document.getElementsByTagName('body')[0].style.cssText = 'margin: 0; height: 100%; overflow: hidden';
         this.modifyCurrentFlag = Object(util__WEBPACK_IMPORTED_MODULE_4__["isUndefined"])(modifyCurrentFlag) ? this.modifyCurrentFlag : modifyCurrentFlag;
         this.selectedPlusIndex = Object(util__WEBPACK_IMPORTED_MODULE_4__["isUndefined"])(menuIndex) ? 0 : menuIndex;
-        this.showCypherMenu = true;
-    };
-    InfrastructureNodeListService.prototype.HideCypherMenu = function () {
-        document.getElementsByTagName('body')[0].style.cssText = '';
-        this.showCypherMenu = false;
-        this.WindowScrollTo(this.pageYOffset);
+        console.table(this.NodeList);
     };
     InfrastructureNodeListService.prototype.AddNodeToNodeList = function (type, cypher, id) {
         var newNodeId = Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(id) ? this.selectedPlusIndex : id;
@@ -991,7 +987,6 @@ var InfrastructureNodeListService = /** @class */ (function () {
             this.RemoveNodeAtindex(newNodeId - 1);
             this.modifyCurrentFlag = false;
         }
-        this.HideCypherMenu();
     };
     InfrastructureNodeListService.prototype.selectOptionClick = function (id, cypherName) {
         this.AddNodeToNodeList(this.NodeList[id][1], cypherName, id);
@@ -1015,11 +1010,6 @@ var InfrastructureNodeListService = /** @class */ (function () {
         this.AddNodeAtindex(newNode);
         this.RemoveNodeAtindex(id + 1);
         console.log(this.NodeList);
-    };
-    InfrastructureNodeListService.prototype.CypherMenuClickEventListner = function (eventtarget) {
-        if (!(document.getElementById('CypherMenu').contains(eventtarget))) {
-            this.HideCypherMenu();
-        }
     };
     InfrastructureNodeListService.prototype.selectencodeDecodeOptionClick = function (option, id) {
         this.NodeList[id][2] = option;
@@ -1091,7 +1081,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"overlap-fullscreen opacity-0_6 bg-black\" *ngIf=\"infrastructureNodeList.showCypherMenu\" (click)=\"infrastructureNodeList.CypherMenuClickEventListner($event.target)\"></div>\n\n<div class=\"translate-menu-center d-inline-block bg-white p-3 font-family-lucida-console-monaco-monospace\"\nid=\"CypherMenu\" *ngIf=\"infrastructureNodeList.showCypherMenu\" (click)=\"infrastructureNodeList.CypherMenuClickEventListner($event.target)\">\n  <table>\n    <tr>\n      <td>\n        <h1>CypherMenu</h1>\n      </td>\n      <td>\n        <button type=\" button\" class=\"btn btn-secondary\" (click)=\"infrastructureNodeList.HideCypherMenu()\">Close</button>\n      </td>\n    </tr>\n    <tr>\n      <div *ngFor=\"let type of domainDataService.getTypeArray()\">\n        <hr />\n        <button class=\"btn btn-secondary my-2\" type=\"button\" disabled>{{type}}</button>\n        <br />\n        <button class=\"btn btn-secondary mr-1 mb-1\" *ngFor=\"let cypher of domainDataService.getTypeCypherArray(type)\"\n          (click)=\"infrastructureNodeList.AddNodeToNodeList(type, cypher)\">\n          {{cypher}}\n        </button>\n      </div>\n    </tr>\n  </table>\n</div>\n"
+module.exports = "<div class=\"modal fade font-family-lucida-console-monaco-monospace\" id=\"cypher-menu\" tabindex=\"-1\">\r\n  <div class=\"modal-dialog modal-lg\">\r\n    <div class=\"modal-content p-5\">\r\n      <div class=\" container row modal-head\">\r\n        <h2 class=\"modal-title col-10\">Cypher Menu</h2>\r\n        <button class=\"btn btn-secondary shadow col-2 btn-cypher-menu-close max-button-height-3rem\" type=\"button\" data-dismiss=\"modal\">&nbsp;X&nbsp;</button>\r\n      </div>\r\n      <div class=\"modal-body padding-0 container row\" *ngFor=\"let type of domainDataService.getTypeArray()\">\r\n          <hr class=\"w-100\"/>\r\n          <button class=\"btn btn-secondary my-2\" type=\"button\" disabled>{{type}}</button>\r\n          <span class=\"w-100\"></span>\r\n          <button class=\"btn btn-secondary mr-1 mb-1\" *ngFor=\"let cypher of domainDataService.getTypeCypherArray(type)\" (click)=\"infrastructureNodeList.AddNodeToNodeList(type, cypher)\" data-dismiss=\"modal\">\r\n            {{cypher}}\r\n          </button>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n        <button class=\"btn btn-secondary\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Request more Cyphers</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1157,7 +1147,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let options of cypherOptions\" [ngSwitch]=\"options[2].length.toString()\">\r\n  <hr />\r\n  {{options[1]}}\r\n  <br />\r\n\r\n  <div *ngSwitchCase=\"'1'\">\r\n    <input type=\"text\" id=\"{{ id + options[1] }}\" [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\" (keypress)=\"infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])\"/>\r\n  </div>\r\n\r\n  <div *ngSwitchCase=\"'2'\">\r\n    <div class=\"input-group\" *ngIf=\"isInputRange(options[2])\">\r\n      <div class=\"input-group-prepend\">\r\n        <button class=\"btn btn-secondary\" type=\"button\">&nbsp; - &nbsp;</button>\r\n      </div>\r\n      <input type=\"text\" [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\" />\r\n      <div class=\"input-group-append\">\r\n        <button class=\"btn btn-secondary\" type=\"button\">&nbsp; + &nbsp;</button>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"dropdown\" *ngIf=\"!isInputRange(options[2])\">\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n          {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"dropdown\" *ngSwitchDefault>\r\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n      </button>\r\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n      <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<hr class=\"w-100\" />\r\n<div *ngIf=\"isView()\">\r\n    <textarea class=\"mx-1 w-100\" [(ngModel)]=\"infrastructureNodeList.NodeList[id][4]\"></textarea>\r\n  </div>\r\n<div class=\"row\" *ngIf=\"!isView()\">\r\n  <div class=\"col\" *ngFor=\"let options of cypherOptions\" [ngSwitch]=\"options[2].length.toString()\">\r\n    <span class=\"font-weight-bolder font-size-1_25em\">\r\n      {{options[1]}}\r\n    </span>\r\n    <input type=\"text\" id=\"{{ id + options[1] }}\" *ngSwitchCase=\"'1'\"\r\n      [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\"\r\n      (keypress)=\"infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])\" />\r\n\r\n    <div *ngSwitchCase=\"'2'\">\r\n      <!-- // TODO: Make the button Work. -->\r\n      <div class=\"input-group row max-width-5rem ml-1\" *ngIf=\"isInputRange(options[2])\">\r\n        <button class=\"input-group-prepend btn btn-secondary max-width-5rem btn-vertical-input-group-top-rounded\" type=\"button\">&nbsp; + &nbsp;</button>\r\n        <input type=\"text\" class=\"max-width-5rem\"\r\n          [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\" />\r\n        <button class=\" input-group-append btn btn-secondary max-width-5rem btn-vertical-input-group-bottom-rounded\" type=\"button\">&nbsp; - &nbsp;</button>\r\n      </div>\r\n\r\n      <div class=\"dropdown\" *ngIf=\"!isInputRange(options[2])\">\r\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n          {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n        </button>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n          <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"dropdown\" *ngSwitchDefault>\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <hr class=\"w-100 mx-3\" />\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1175,6 +1165,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_domain_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/domain-data.service */ "./src/app/services/domain-data.service.ts");
 /* harmony import */ var _services_infrastructure_node_list_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/infrastructure-node-list.service */ "./src/app/services/infrastructure-node-list.service.ts");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -1187,7 +1180,9 @@ var CypherOptionTemplateComponent = /** @class */ (function () {
     CypherOptionTemplateComponent.prototype.ngOnInit = function () {
         this.id = this.id[0][0];
         // tslint:disable-next-line: max-line-length
+        console.table(this.infrastructureNodeList.NodeList);
         this.cypherOptions = this.domainData.getCypherOptions(this.infrastructureNodeList.NodeList[this.id][1], this.infrastructureNodeList.NodeList[this.id][3][0]);
+        console.table([this.id, this.cypherOptions]);
     };
     CypherOptionTemplateComponent.prototype.isInputRange = function (optionArray) {
         if (!((isNaN(optionArray[0])) && (isNaN(optionArray[0])))) {
@@ -1203,6 +1198,12 @@ var CypherOptionTemplateComponent = /** @class */ (function () {
             }
         }
         return null;
+    };
+    CypherOptionTemplateComponent.prototype.isView = function () {
+        if (Object(util__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(this.cypherOptions)) {
+            return true;
+        }
+        return false;
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -1241,7 +1242,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"footer bg-white pt-4 font-family-lucida-console-monaco-monospace\">\n  <table class=\"mx-5\">\n    <tr>\n      <td>\n\n      </td>\n      <td>\n\n      </td>\n    </tr>\n    <tr>\n      <h5>Cyphr:</h5>\n      <p>\n        It is a Web App made to offer modular endoding, decoding and conversion of text based message or string.<br />\n        All the operation are done within the browser without any server involvement.\n      </p>\n    </tr>\n    <tr>\n      <td>\n        <b>Made by:&nbsp;</b><a href=\"https://github.com/pru-namikaze\">Pru Namikaze</a>\n        <a class=\"border rounded p-2 ml-4\" href=\"https://github.com/pru-namikaze/Cyphr\">Cyphr Github</a>\n      </td>\n    </tr>\n  </table>\n  <br />\n</div>\n"
+module.exports = "<footer class=\"col-12 align-self-center no-gutters align-self-end container row bg-white font-family-lucida-console-monaco-monospace px-5 py-4\">\r\n  <h5 class=\"font-size-1_5em\">Cyphr:</h5>\r\n  <p class=\"w-100\">\r\n    It is a Web App made to offer modular endoding, decoding and conversion of text based message or string.<br />\r\n    All the operation are done within the browser without any server involvement.\r\n  </p>\r\n  <div class=\"w-100 col-xl-5 col-lg-6 col-md-9 cointainer row no-gutters\">\r\n    <b class=\"margin-top-0_7rem col-xl-2 col-lg-3 col-md-2\">Made by:</b>\r\n    <button class=\"btn btn-secondary col-xl-3 col-lg-4 col-md-3 m-1\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Pru Namikaze</button>\r\n    <button class=\"btn btn-secondary col-xl-3 col-lg-4 col-md-4 m-1 p-2\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Cyphr Github</button>\r\n  </div>\r\n  <br />\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -1257,10 +1258,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterComponent", function() { return FooterComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/common.service */ "./src/app/services/common.service.ts");
+
 
 
 var FooterComponent = /** @class */ (function () {
-    function FooterComponent() {
+    function FooterComponent(common) {
+        this.common = common;
     }
     FooterComponent.prototype.ngOnInit = function () {
     };
@@ -1270,7 +1274,7 @@ var FooterComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./footer.component.html */ "./src/app/templates/footer/footer.component.html"),
             styles: [__webpack_require__(/*! ./footer.component.css */ "./src/app/templates/footer/footer.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_common_service__WEBPACK_IMPORTED_MODULE_2__["CommonService"]])
     ], FooterComponent);
     return FooterComponent;
 }());
@@ -1297,7 +1301,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light dimension-header\">\n  <span class=\"navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2\">\n    <h1>Cyphr</h1>\n  </span>\n</nav>\n"
+module.exports = "<header class=\"vw-100 no-gutters\">\n  <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n    <span class=\"navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2\">\n      <h1>Cyphr</h1>\n    </span>\n  </nav>\n</header>\n"
 
 /***/ }),
 
@@ -1353,7 +1357,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-cypher-menu-template></app-cypher-menu-template>\n\n<button class=\"btn btn-secondary my-5 translate-plus-icon-center\" id=\"-1-node-list-conjuction\" type=\"button\"\n  (click)=\"infrastructureNodeList.ShowCypherMenu()\" (mouseover)=\"infrastructureNodeList.ArrowToPlus(-1, true)\"\n  (mouseout)=\"infrastructureNodeList.ArrowToPlus(-1, false)\">\n  <span class=\"fas fa-chevron-down\"></span>\n</button>\n\n<div class=\"dimension-node-list\">\n  <app-node-template class=\"mx-5\" *ngFor=\"let node of infrastructureNodeList.NodeList\" [id]=[node[0]]>\n  </app-node-template>\n</div>\n<div class=\"back-to-top-btn\" id=\"back-to-top-btn\">\n  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"infrastructureNodeList.WindowScrollTo(0)\">\n    Back <br />\n    to Top\n  </button>\n</div>\n"
+module.exports = "<app-cypher-menu-template></app-cypher-menu-template>\r\n\r\n<div class=\" container-fluid no-gutters padding-0 row \">\r\n  <button class=\"btn btn-secondary offset-6 my-4\" id=\"-1-node-list-conjuction\" type=\"button\" data-toggle=\"modal\" data-target=\"#cypher-menu\" (click)=\"infrastructureNodeList.ShowCypherMenu()\" (mouseover)=\"infrastructureNodeList.ArrowToPlus(-1, true)\" (mouseout)=\"infrastructureNodeList.ArrowToPlus(-1, false)\">\r\n    <span class=\"fas fa-chevron-down\"></span>\r\n  </button>\r\n\r\n  <app-node-template class=\"jumbotron-fluid\" *ngFor=\"let node of infrastructureNodeList.NodeList\" [id]=[node[0]]>\r\n  </app-node-template>\r\n\r\n  <button class=\"btn btn-secondary btn-feedback font-size-1_15em\" type=\"button\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">\r\n    <span class=\"fas fa-comment-dots\"></span>&nbsp;Feedback\r\n  </button>\r\n\r\n\r\n  <div class=\"back-to-top-btn\" id=\"back-to-top-btn\">\r\n    <button class=\"btn btn-secondary\" type=\"button\" (click)=\"infrastructureNodeList.WindowScrollTo(0)\">\r\n      Back <br />\r\n      to Top\r\n    </button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1371,14 +1375,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_domain_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/domain-data.service */ "./src/app/services/domain-data.service.ts");
 /* harmony import */ var _services_infrastructure_node_list_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/infrastructure-node-list.service */ "./src/app/services/infrastructure-node-list.service.ts");
+/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/common.service */ "./src/app/services/common.service.ts");
+
 
 
 
 
 var MainComponentComponent = /** @class */ (function () {
-    function MainComponentComponent(domainDataService, infrastructureNodeList) {
+    // tslint:disable-next-line: max-line-length
+    function MainComponentComponent(domainDataService, infrastructureNodeList, common) {
         this.domainDataService = domainDataService;
         this.infrastructureNodeList = infrastructureNodeList;
+        this.common = common;
     }
     MainComponentComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1396,7 +1404,7 @@ var MainComponentComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./main-component.component.html */ "./src/app/templates/main-component/main-component.component.html"),
             styles: [__webpack_require__(/*! ./main-component.component.css */ "./src/app/templates/main-component/main-component.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_domain_data_service__WEBPACK_IMPORTED_MODULE_2__["DomainDataService"], _services_infrastructure_node_list_service__WEBPACK_IMPORTED_MODULE_3__["InfrastructureNodeListService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_domain_data_service__WEBPACK_IMPORTED_MODULE_2__["DomainDataService"], _services_infrastructure_node_list_service__WEBPACK_IMPORTED_MODULE_3__["InfrastructureNodeListService"], _services_common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]])
     ], MainComponentComponent);
     return MainComponentComponent;
 }());
@@ -1423,7 +1431,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header></app-header><br />\n\n<app-main-component></app-main-component><br />\n\n<app-footer></app-footer>\n"
+module.exports = "<app-header></app-header>\n\n<app-main-component></app-main-component>\n\n<app-footer></app-footer>\n"
 
 /***/ }),
 
@@ -1479,7 +1487,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"rounded border shadow dimension-dialog-box p-4 translate-node-center\">\r\n  <table>\r\n    <tr>\r\n      <!-- Dropdown for Encode/ Decode. -->\r\n      <td class=\"font-family-lucida-console-monaco-monospace\" *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n        <div class=\"dropdown\">\r\n          <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n            {{infrastructureNodeList.NodeList[id][2]}}\r\n          </button>\r\n          <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n            <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of domainData.encodeDecodeOptions\"\r\n              (click)=\"infrastructureNodeList.selectencodeDecodeOptionClick(option, id)\">{{option}}</button>\r\n          </div>\r\n        </div>\r\n      </td>\r\n      <!-- Button for Removin the node from the Encoding Decoding Stream. -->\r\n      <td>\r\n        <button class=\"btn btn-secondary position-close-btn\" type=\"button\"\r\n          (click)=\"infrastructureNodeList.RemoveNodeAtindex(id)\">\r\n          X\r\n        </button>\r\n      </td>\r\n    </tr>\r\n    <br />\r\n    <tr>\r\n      <!-- Cypher Type -->\r\n      <td class=\"font-family-lucida-console-monaco-monospace-2em\">\r\n        {{infrastructureNodeList.NodeList[id][1]}}\r\n      </td>\r\n    </tr>\r\n    <br />\r\n    <tr>\r\n      <!-- Cypher Name -->\r\n      <div class=\"dropdown\">\r\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n          {{infrastructureNodeList.NodeList[id][3][0]}}\r\n        </button>\r\n        <div class=\"dropdown-menu\">\r\n          <button class=\"dropdown-item\" type=\"button\"\r\n            (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)\">\r\n            Other Cyphers</button>\r\n            <hr />\r\n          <button class=\"dropdown-item\" type=\"button\"\r\n            *ngFor=\"let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])\"\r\n            (click)=\"infrastructureNodeList.selectOptionClick(id, option)\">{{option}}</button>\r\n        </div>\r\n      </div>\r\n    </tr>\r\n    <br />\r\n    <tr>\r\n      <td>\r\n        <!-- Cypher Options -->\r\n        <app-cypher-option [id]=[id]></app-cypher-option>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <hr />\r\n    </tr>\r\n    <tr class=\"d-inline-block\">\r\n      <td *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n        // TODO: Add time taken for performance measurement.\r\n      </td>\r\n      <td *ngIf=\"!infrastructureNodeList.NodeList[id][2]\">\r\n        <textarea [(ngModel)]=\"infrastructureNodeList.NodeList[id][4]\"></textarea>\r\n      </td>\r\n    </tr>\r\n  </table>\r\n</div>\r\n\r\n<button class=\"btn btn-secondary my-5 translate-plus-icon-center\" id=\"{{ id + '-node-list-conjuction' }}\" type=\"button\"\r\n  (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)\"\r\n  (mouseover)=\"infrastructureNodeList.ArrowToPlus(id, true)\"\r\n  (mouseout)=\"infrastructureNodeList.ArrowToPlus(id, false)\">\r\n  <span class=\"fas fa-chevron-down\"></span>\r\n</button>\r\n"
+module.exports = "<div class=\"vw-100 container-fluid font-family-lucida-console-monaco-monospace bg-white border rounded shadow row col-10 col-md-8 col-lg-6 col-xl-6 offset-1 offset-md-2 offset-lg-3 offset-xl-3\">\r\n  <div class=\"w-100 my-4 mx-3 row\">\r\n    <!-- Dropdown for Encode/ Decode. -->\r\n    <div class=\"btn-group dropright col-sm-2 dropdown-encode-decode max-button-height-3rem\">\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"\r\n        *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n        {{infrastructureNodeList.NodeList[id][2]}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of domainData.encodeDecodeOptions\"\r\n          (click)=\"infrastructureNodeList.selectencodeDecodeOptionClick(option, id)\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Cypher Type -->\r\n    <span class=\" font-family-lucida-console-monaco-monospace font-size-2em col-sm-8 text-center\">\r\n      {{infrastructureNodeList.NodeList[id][1]}}\r\n    </span>\r\n\r\n    <!-- Button for Removin the node from the Encoding Decoding Stream. -->\r\n    <button class=\"btn btn-secondary col-sm-1 btn-close max-button-height-3rem offset-1\" type=\"button\" (click)=\"infrastructureNodeList.RemoveNodeAtindex(id)\">\r\n      X\r\n    </button>\r\n\r\n    <!-- Cypher Name -->\r\n    <div class=\"dropright m-3\">\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{infrastructureNodeList.NodeList[id][3][0]}}\r\n      </button>\r\n      <div class=\"dropdown-menu\">\r\n        <button class=\"dropdown-item\" type=\"button\"\r\n          (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)\">\r\n          Other Cyphers</button>\r\n        <hr />\r\n        <button class=\"dropdown-item\" type=\"button\"\r\n          *ngFor=\"let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])\"\r\n          (click)=\"infrastructureNodeList.selectOptionClick(id, option)\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Cypher Options -->\r\n    <app-cypher-option class=\"container-fluid padding-0 mx-3\" [id]=[id]></app-cypher-option>\r\n\r\n    <div class=\"w-100 mx-3\" *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n      // TODO: Add time taken for performance measurement.\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<button class=\"btn btn-secondary offset-6 my-4\" id=\"{{ id + '-node-list-conjuction' }}\" type=\"button\"\r\n  data-toggle=\"modal\" data-target=\"#cypher-menu\"\r\n  (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)\"\r\n  (mouseover)=\"infrastructureNodeList.ArrowToPlus(id, true)\" (mouseout)=\"infrastructureNodeList.ArrowToPlus(id, false)\">\r\n  <span class=\"fas fa-chevron-down\"></span>\r\n</button>\r\n"
 
 /***/ }),
 
