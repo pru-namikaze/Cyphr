@@ -1,18 +1,17 @@
 <app-cypher-menu-template></app-cypher-menu-template>
 
-<button class="btn btn-secondary my-5 translate-plus-icon-center" id="-1-node-list-conjuction" type="button"
-  (click)="infrastructureNodeList.ShowCypherMenu()" (mouseover)="infrastructureNodeList.ArrowToPlus(-1, true)"
-  (mouseout)="infrastructureNodeList.ArrowToPlus(-1, false)">
-  <span class="fas fa-chevron-down"></span>
-</button>
-
-<div class="dimension-node-list">
-  <app-node-template class="mx-5" *ngFor="let node of infrastructureNodeList.NodeList" [id]=[node[0]]>
-  </app-node-template>
-</div>
-<div class="back-to-top-btn" id="back-to-top-btn">
-  <button class="btn btn-secondary" type="button" (click)="infrastructureNodeList.WindowScrollTo(0)">
-    Back <br />
-    to Top
+<div class=" container-fluid no-gutters padding-0 row ">
+  <button class="btn btn-secondary offset-6 my-4" id="-1-node-list-conjuction" type="button" data-toggle="modal" data-target="#cypher-menu" (click)="infrastructureNodeList.ShowCypherMenu()" (mouseover)="infrastructureNodeList.ArrowToPlus(-1, true)" (mouseout)="infrastructureNodeList.ArrowToPlus(-1, false)">
+    <span class="fas fa-chevron-down"></span>
   </button>
+
+  <app-node-template class="jumbotron-fluid" *ngFor="let node of infrastructureNodeList.NodeList" [id]=[node[0]]>
+  </app-node-template>
+
+  <div class="back-to-top-btn" id="back-to-top-btn">
+    <button class="btn btn-secondary" type="button" (click)="infrastructureNodeList.WindowScrollTo(0)">
+      Back <br />
+      to Top
+    </button>
+  </div>
 </div>

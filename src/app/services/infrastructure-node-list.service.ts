@@ -73,20 +73,8 @@ export class InfrastructureNodeListService {
   }
 
   ShowCypherMenu(menuIndex?: number, modifyCurrentFlag?: boolean): void {
-    this.pageYOffset = window.pageYOffset;
-    this.WindowScrollTo(0);
-    document.getElementsByTagName('body')[0].style.cssText = 'margin: 0; height: 100%; overflow: hidden';
-
     this.modifyCurrentFlag = isUndefined(modifyCurrentFlag) ? this.modifyCurrentFlag : modifyCurrentFlag;
     this.selectedPlusIndex = isUndefined(menuIndex) ? 0 : menuIndex;
-    this.showCypherMenu = true;
-  }
-
-  HideCypherMenu(): void {
-    document.getElementsByTagName('body')[0].style.cssText = '';
-    this.showCypherMenu = false;
-    this.WindowScrollTo( this.pageYOffset);
-
   }
   AddNodeToNodeList(type: string, cypher: string, id?: number): void {
     const newNodeId: number = isNullOrUndefined(id) ? this.selectedPlusIndex : id;
@@ -108,8 +96,6 @@ export class InfrastructureNodeListService {
       this.RemoveNodeAtindex(newNodeId - 1);
       this.modifyCurrentFlag = false;
     }
-
-    this.HideCypherMenu();
   }
 
   selectOptionClick(id: number, cypherName: string): void {
@@ -135,12 +121,6 @@ export class InfrastructureNodeListService {
     this.RemoveNodeAtindex(id + 1);
 
     console.log(this.NodeList);
-  }
-
-  CypherMenuClickEventListner(eventtarget: any): void {
-    if (!(document.getElementById('CypherMenu').contains(eventtarget))) {
-      this.HideCypherMenu();
-    }
   }
 
   selectencodeDecodeOptionClick(option: string, id: number): void {

@@ -18,7 +18,6 @@ export class DomainDataService {
 
   // Make it Level 2 Generic.
   getValue(array: any, key: string): any {
-    let valueArray: any[] = [];
     for (const element of array) {
       if (element[0] === key) {
         return element;
@@ -63,7 +62,6 @@ export class DomainDataService {
     return cypher[2];
   }
   getDefaultConfiguration(type: string, cypher: string): any {
-    // TODO: Work on it to give default configuration of the cypher
     const cypherOption: Array<[number, string, Array<string>]> = this.getCypherOptions(type, cypher);
     let defaultCypherOptions: Array<[number, string, string]> = [];
 

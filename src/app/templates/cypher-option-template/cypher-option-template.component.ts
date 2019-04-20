@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomainDataService } from '../../services/domain-data.service';
 import { InfrastructureNodeListService } from '../../services/infrastructure-node-list.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-cypher-option',
@@ -18,7 +19,9 @@ export class CypherOptionTemplateComponent implements OnInit {
   ngOnInit() {
     this.id = this.id[0][0];
     // tslint:disable-next-line: max-line-length
+    console.table(this.infrastructureNodeList.NodeList);
     this.cypherOptions = this.domainData.getCypherOptions(this.infrastructureNodeList.NodeList[this.id][1], this.infrastructureNodeList.NodeList[this.id][3][0]);
+    console.table([this.id, this.cypherOptions]);
   }
 
   isInputRange(optionArray: any): boolean {
@@ -37,5 +40,11 @@ export class CypherOptionTemplateComponent implements OnInit {
     return null;
   }
 
+  isView() {
+    if (isNullOrUndefined(this.cypherOptions)) {
+      return true;
+    }
+    return false;
+  }
 
 }

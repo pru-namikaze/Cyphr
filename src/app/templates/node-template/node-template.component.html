@@ -1,75 +1,63 @@
-<div class="rounded border shadow dimension-dialog-box p-4 translate-node-center">
-  <table>
-    <tr>
-      <!-- Dropdown for Encode/ Decode. -->
-      <td class="font-family-lucida-console-monaco-monospace" *ngIf="infrastructureNodeList.NodeList[id][2]">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-            {{infrastructureNodeList.NodeList[id][2]}}
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item" type="button" *ngFor="let option of domainData.encodeDecodeOptions"
-              (click)="infrastructureNodeList.selectencodeDecodeOptionClick(option, id)">{{option}}</button>
-          </div>
-        </div>
-      </td>
-      <!-- Button for Removin the node from the Encoding Decoding Stream. -->
-      <td>
-        <button class="btn btn-secondary position-close-btn" type="button"
-          (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
-          X
-        </button>
-      </td>
-    </tr>
-    <br />
-    <tr>
-      <!-- Cypher Type -->
-      <td class="font-family-lucida-console-monaco-monospace-2em">
-        {{infrastructureNodeList.NodeList[id][1]}}
-      </td>
-    </tr>
-    <br />
-    <tr>
-      <!-- Cypher Name -->
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-          {{infrastructureNodeList.NodeList[id][3][0]}}
-        </button>
-        <div class="dropdown-menu">
-          <button class="dropdown-item" type="button"
-            (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)">
-            Other Cyphers</button>
-            <hr />
-          <button class="dropdown-item" type="button"
-            *ngFor="let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
-            (click)="infrastructureNodeList.selectOptionClick(id, option)">{{option}}</button>
-        </div>
+<div class="vw-100 container-fluid font-family-lucida-console-monaco-monospace bg-white border rounded shadow row col-10 col-md-8 col-lg-6 col-xl-6 offset-1 offset-md-2 offset-lg-3 offset-xl-3">
+  <div class="w-100 mt-4 mx-3 row">
+    <!-- Dropdown for Encode/ Decode. -->
+    <div class="btn-group dropright col-sm-2 dropdown-encode-decode min-button-height-3rem">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+        *ngIf="infrastructureNodeList.NodeList[id][2]">
+        {{infrastructureNodeList.NodeList[id][2]}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" *ngFor="let option of domainData.encodeDecodeOptions"
+          (click)="infrastructureNodeList.selectencodeDecodeOptionClick(option, id)">{{option}}</button>
       </div>
-    </tr>
-    <br />
-    <tr>
-      <td>
-        <!-- Cypher Options -->
-        <app-cypher-option [id]=[id]></app-cypher-option>
-      </td>
-    </tr>
-    <tr>
-      <hr />
-    </tr>
-    <tr class="d-inline-block">
-      <td *ngIf="infrastructureNodeList.NodeList[id][2]">
-        // TODO: Add time taken for performance measurement.
-      </td>
-      <td *ngIf="!infrastructureNodeList.NodeList[id][2]">
+    </div>
+
+    <!-- Cypher Type -->
+    <span class=" font-family-lucida-console-monaco-monospace font-size-2em col-sm-8 text-center">
+      {{infrastructureNodeList.NodeList[id][1]}}
+    </span>
+
+    <!-- Button for Removin the node from the Encoding Decoding Stream. -->
+    <button class="btn btn-secondary col-sm-1 btn-close min-button-height-3rem offset-1" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
+      X
+    </button>
+
+    <!-- Cypher Name -->
+    <div class="dropdown w-100 m-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+        {{infrastructureNodeList.NodeList[id][3][0]}}
+      </button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item" type="button"
+          (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)">
+          Other Cyphers</button>
+        <hr />
+        <button class="dropdown-item" type="button"
+          *ngFor="let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])"
+          (click)="infrastructureNodeList.selectOptionClick(id, option)">{{option}}</button>
+      </div>
+    </div>
+
+    <hr class="w-100" />
+
+    <!-- Cypher Options -->
+    <app-cypher-option class="container-fluid row" [id]=[id]></app-cypher-option>
+
+    <hr class="w-100" />
+    
+    <div class="d-inline-block" *ngIf="infrastructureNodeList.NodeList[id][2]">
+      // TODO: Add time taken for performance measurement.
+      <!-- // TODO: Move the below code to input dynimacally -->
+      <div *ngIf="!infrastructureNodeList.NodeList[id][2]">
         <textarea [(ngModel)]="infrastructureNodeList.NodeList[id][4]"></textarea>
-      </td>
-    </tr>
-  </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-<button class="btn btn-secondary my-5 translate-plus-icon-center" id="{{ id + '-node-list-conjuction' }}" type="button"
+<button class="btn btn-secondary offset-6 my-4" id="{{ id + '-node-list-conjuction' }}" type="button"
+  data-toggle="modal" data-target="#cypher-menu"
   (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)"
-  (mouseover)="infrastructureNodeList.ArrowToPlus(id, true)"
-  (mouseout)="infrastructureNodeList.ArrowToPlus(id, false)">
+  (mouseover)="infrastructureNodeList.ArrowToPlus(id, true)" (mouseout)="infrastructureNodeList.ArrowToPlus(id, false)">
   <span class="fas fa-chevron-down"></span>
 </button>

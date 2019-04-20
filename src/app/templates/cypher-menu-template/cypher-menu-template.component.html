@@ -1,27 +1,22 @@
-
-<div class="overlap-fullscreen opacity-0_6 bg-black" *ngIf="infrastructureNodeList.showCypherMenu" (click)="infrastructureNodeList.CypherMenuClickEventListner($event.target)"></div>
-
-<div class="translate-menu-center d-inline-block bg-white p-3 font-family-lucida-console-monaco-monospace"
-id="CypherMenu" *ngIf="infrastructureNodeList.showCypherMenu" (click)="infrastructureNodeList.CypherMenuClickEventListner($event.target)">
-  <table>
-    <tr>
-      <td>
-        <h1>CypherMenu</h1>
-      </td>
-      <td>
-        <button type=" button" class="btn btn-secondary" (click)="infrastructureNodeList.HideCypherMenu()">Close</button>
-      </td>
-    </tr>
-    <tr>
-      <div *ngFor="let type of domainDataService.getTypeArray()">
-        <hr />
-        <button class="btn btn-secondary my-2" type="button" disabled>{{type}}</button>
-        <br />
-        <button class="btn btn-secondary mr-1 mb-1" *ngFor="let cypher of domainDataService.getTypeCypherArray(type)"
-          (click)="infrastructureNodeList.AddNodeToNodeList(type, cypher)">
-          {{cypher}}
-        </button>
+<div class="modal fade font-family-lucida-console-monaco-monospace" id="cypher-menu" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-5">
+      <div class=" container row modal-head">
+        <h2 class="modal-title col-10">Cypher Menu</h2>
+        <button class="btn btn-secondary shadow col-2 btn-cypher-menu-close min-button-height-3rem" type="button" data-dismiss="modal">&nbsp;X&nbsp;</button>
       </div>
-    </tr>
-  </table>
+      <div class="modal-body padding-0 container row" *ngFor="let type of domainDataService.getTypeArray()">
+          <hr class="w-100"/>
+          <button class="btn btn-secondary my-2" type="button" disabled>{{type}}</button>
+          <span class="w-100"></span>
+          <button class="btn btn-secondary mr-1 mb-1" *ngFor="let cypher of domainDataService.getTypeCypherArray(type)" (click)="infrastructureNodeList.AddNodeToNodeList(type, cypher)" data-dismiss="modal">
+            {{cypher}}
+          </button>
+        </div>
+        <div class="modal-footer">
+        // TODO: Add option to ask users to add more cyphers<br />
+        <button class="btn btn-secondary">Request more Cyphers</button>
+      </div>
+    </div>
+  </div>
 </div>
