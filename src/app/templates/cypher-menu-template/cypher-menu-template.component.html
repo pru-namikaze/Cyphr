@@ -3,7 +3,7 @@
     <div class="modal-content p-5">
       <div class=" container row modal-head">
         <h2 class="modal-title col-10">Cypher Menu</h2>
-        <button class="btn btn-secondary shadow col-2 btn-cypher-menu-close min-button-height-3rem" type="button" data-dismiss="modal">&nbsp;X&nbsp;</button>
+        <button class="btn btn-secondary shadow col-2 btn-cypher-menu-close max-button-height-3rem" type="button" data-dismiss="modal">&nbsp;X&nbsp;</button>
       </div>
       <div class="modal-body padding-0 container row" *ngFor="let type of domainDataService.getTypeArray()">
           <hr class="w-100"/>
@@ -14,8 +14,7 @@
           </button>
         </div>
         <div class="modal-footer">
-        // TODO: Add option to ask users to add more cyphers<br />
-        <button class="btn btn-secondary">Request more Cyphers</button>
+        <button class="btn btn-secondary" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">Request more Cyphers</button>
       </div>
     </div>
   </div>

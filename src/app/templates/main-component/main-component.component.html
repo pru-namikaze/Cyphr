@@ -8,6 +8,11 @@
   <app-node-template class="jumbotron-fluid" *ngFor="let node of infrastructureNodeList.NodeList" [id]=[node[0]]>
   </app-node-template>
 
+  <button class="btn btn-secondary btn-feedback font-size-1_15em" type="button" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">
+    <span class="fas fa-comment-dots"></span>&nbsp;Feedback
+  </button>
+
+
   <div class="back-to-top-btn" id="back-to-top-btn">
     <button class="btn btn-secondary" type="button" (click)="infrastructureNodeList.WindowScrollTo(0)">
       Back <br />

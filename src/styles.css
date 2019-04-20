@@ -11,6 +11,10 @@
 {
   font-size: 1.25em;
 }
+.font-size-1_15em
+{
+  font-size: 1.15em;
+}
 .font-size-2em
 {
   font-size: 2em;
@@ -47,6 +51,7 @@ body
 }
 .back-to-top-btn
 {
+  display: none;
   position: fixed;
   right: 5vw;
   bottom: 5vh;
@@ -55,8 +60,11 @@ body
 {
   min-height: 50vh;
 }
-
-.min-button-height-3rem
+.margin-top-0_7rem
+{
+  margin-top: 0.7rem;
+}
+.max-button-height-3rem
 {
   max-height: 3rem;
 }
@@ -89,4 +97,25 @@ body
 .max-width-5rem
 {
   width: 5rem;
+}
+.btn-vertical-input-group-top-rounded
+{
+  border-radius: 0.25rem 0.25rem 0rem 0rem;
+}
+.input-text-vertical-input-group-middle-no-rounded
+{
+  border-radius: 0rem;
+}
+.btn-vertical-input-group-bottom-rounded
+{
+  border-radius: 0rem 0rem 0.25rem 0.25rem;
+  margin-left: 0px;
+}
+.btn-feedback
+{
+  position: fixed;
+  top:50vh;
+  right:-2.5rem;
+  transform: rotate(270deg);
+  height: 3rem;
 }

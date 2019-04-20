@@ -1,7 +1,7 @@
 <div class="vw-100 container-fluid font-family-lucida-console-monaco-monospace bg-white border rounded shadow row col-10 col-md-8 col-lg-6 col-xl-6 offset-1 offset-md-2 offset-lg-3 offset-xl-3">
-  <div class="w-100 mt-4 mx-3 row">
+  <div class="w-100 my-4 mx-3 row">
     <!-- Dropdown for Encode/ Decode. -->
-    <div class="btn-group dropright col-sm-2 dropdown-encode-decode min-button-height-3rem">
+    <div class="btn-group dropright col-sm-2 dropdown-encode-decode max-button-height-3rem">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
         *ngIf="infrastructureNodeList.NodeList[id][2]">
         {{infrastructureNodeList.NodeList[id][2]}}
@@ -18,12 +18,12 @@
     </span>
 
     <!-- Button for Removin the node from the Encoding Decoding Stream. -->
-    <button class="btn btn-secondary col-sm-1 btn-close min-button-height-3rem offset-1" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
+    <button class="btn btn-secondary col-sm-1 btn-close max-button-height-3rem offset-1" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
       X
     </button>
 
     <!-- Cypher Name -->
-    <div class="dropdown w-100 m-3">
+    <div class="dropright m-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
         {{infrastructureNodeList.NodeList[id][3][0]}}
       </button>
@@ -38,19 +38,11 @@
       </div>
     </div>
 
-    <hr class="w-100" />
-
     <!-- Cypher Options -->
-    <app-cypher-option class="container-fluid row" [id]=[id]></app-cypher-option>
+    <app-cypher-option class="container-fluid padding-0 mx-3" [id]=[id]></app-cypher-option>
 
-    <hr class="w-100" />
-    
-    <div class="d-inline-block" *ngIf="infrastructureNodeList.NodeList[id][2]">
+    <div class="w-100 mx-3" *ngIf="infrastructureNodeList.NodeList[id][2]">
       // TODO: Add time taken for performance measurement.
-      <!-- // TODO: Move the below code to input dynimacally -->
-      <div *ngIf="!infrastructureNodeList.NodeList[id][2]">
-        <textarea [(ngModel)]="infrastructureNodeList.NodeList[id][4]"></textarea>
-      </div>
     </div>
   </div>
 </div>

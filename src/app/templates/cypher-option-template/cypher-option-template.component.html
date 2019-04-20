@@ -1,7 +1,8 @@
+<hr class="w-100" />
 <div *ngIf="isView()">
-  <input type="text" id="{{id}}"/>
-</div>
-<div *ngIf="!isView()">
+    <textarea class="mx-1 w-100" [(ngModel)]="infrastructureNodeList.NodeList[id][4]"></textarea>
+  </div>
+<div class="row" *ngIf="!isView()">
   <div class="col" *ngFor="let options of cypherOptions" [ngSwitch]="options[2].length.toString()">
     <span class="font-weight-bolder font-size-1_25em">
       {{options[1]}}
@@ -13,10 +14,10 @@
     <div *ngSwitchCase="'2'">
       <!-- // TODO: Make the button Work. -->
       <div class="input-group row max-width-5rem ml-1" *ngIf="isInputRange(options[2])">
-        <button class="input-group-prepend btn btn-secondary max-width-5rem" type="button">&nbsp; - &nbsp;</button>
+        <button class="input-group-prepend btn btn-secondary max-width-5rem btn-vertical-input-group-top-rounded" type="button">&nbsp; + &nbsp;</button>
         <input type="text" class="max-width-5rem"
           [ngModel]="getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])" />
-        <button class=" input-group-append btn btn-secondary max-width-5rem" type="button">&nbsp; + &nbsp;</button>
+        <button class=" input-group-append btn btn-secondary max-width-5rem btn-vertical-input-group-bottom-rounded" type="button">&nbsp; - &nbsp;</button>
       </div>
 
       <div class="dropdown" *ngIf="!isInputRange(options[2])">
@@ -38,4 +39,5 @@
       </div>
     </div>
   </div>
+  <hr class="w-100 mx-3" />
 </div>

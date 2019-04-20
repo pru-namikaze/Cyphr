@@ -75,6 +75,7 @@ export class InfrastructureNodeListService {
   ShowCypherMenu(menuIndex?: number, modifyCurrentFlag?: boolean): void {
     this.modifyCurrentFlag = isUndefined(modifyCurrentFlag) ? this.modifyCurrentFlag : modifyCurrentFlag;
     this.selectedPlusIndex = isUndefined(menuIndex) ? 0 : menuIndex;
+    console.table(this.NodeList);
   }
   AddNodeToNodeList(type: string, cypher: string, id?: number): void {
     const newNodeId: number = isNullOrUndefined(id) ? this.selectedPlusIndex : id;
