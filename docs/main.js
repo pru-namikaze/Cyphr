@@ -23,39 +23,6 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
-/***/ "./src/app/app-routing.module.ts":
-/*!***************************************!*\
-  !*** ./src/app/app-routing.module.ts ***!
-  \***************************************/
-/*! exports provided: AppRoutingModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
-
-
-var routes = [];
-var AppRoutingModule = /** @class */ (function () {
-    function AppRoutingModule() {
-    }
-    AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes)],
-            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
-        })
-    ], AppRoutingModule);
-    return AppRoutingModule;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/app.component.css":
 /*!***********************************!*\
   !*** ./src/app/app.component.css ***!
@@ -124,11 +91,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _templates_templates_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./templates/templates.module */ "./src/app/templates/templates.module.ts");
-/* harmony import */ var _templates_main_template_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./templates/main-template.component */ "./src/app/templates/main-template.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _templates_about_us_template_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./templates/about-us-template.component */ "./src/app/templates/about-us-template.component.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _templates_templates_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./templates/templates.module */ "./src/app/templates/templates.module.ts");
+/* harmony import */ var _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./templates/main-template.component */ "./src/app/templates/main-template.component.ts");
 
 
 
@@ -138,25 +105,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var routes = [
+    { path: 'AboutUs', component: _templates_about_us_template_component__WEBPACK_IMPORTED_MODULE_5__["AboutUsTemplateComponent"] },
+    { path: '', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"] },
+    { path: '**', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"] }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
-                _templates_templates_module__WEBPACK_IMPORTED_MODULE_6__["TemplatesModule"],
+                _templates_templates_module__WEBPACK_IMPORTED_MODULE_7__["TemplatesModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"].forRoot([
-                    { path: '', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_7__["MainTemplateComponent"] }
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot([
+                    { path: 'AboutUs', component: _templates_about_us_template_component__WEBPACK_IMPORTED_MODULE_5__["AboutUsTemplateComponent"] },
+                    { path: '', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"] },
+                    { path: '**', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"], pathMatch: 'full' }
                 ])
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -1063,6 +1036,62 @@ var InfrastructureNodeListService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/templates/about-us-template.component.css":
+/*!***********************************************************!*\
+  !*** ./src/app/templates/about-us-template.component.css ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3RlbXBsYXRlcy9hYm91dC11cy10ZW1wbGF0ZS5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/templates/about-us-template.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/templates/about-us-template.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-header></app-header>\n\nAbout us\n\n<app-footer></app-footer>\n"
+
+/***/ }),
+
+/***/ "./src/app/templates/about-us-template.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/templates/about-us-template.component.ts ***!
+  \**********************************************************/
+/*! exports provided: AboutUsTemplateComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutUsTemplateComponent", function() { return AboutUsTemplateComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var AboutUsTemplateComponent = /** @class */ (function () {
+    function AboutUsTemplateComponent() {
+    }
+    AboutUsTemplateComponent.prototype.ngOnInit = function () {
+    };
+    AboutUsTemplateComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-about-us-template',
+            template: __webpack_require__(/*! ./about-us-template.component.html */ "./src/app/templates/about-us-template.component.html"),
+            styles: [__webpack_require__(/*! ./about-us-template.component.css */ "./src/app/templates/about-us-template.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], AboutUsTemplateComponent);
+    return AboutUsTemplateComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/templates/cypher-menu-template/cypher-menu-template.component.css":
 /*!***********************************************************************************!*\
   !*** ./src/app/templates/cypher-menu-template/cypher-menu-template.component.css ***!
@@ -1242,7 +1271,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<footer class=\"col-12 align-self-center no-gutters align-self-end container row bg-white font-family-lucida-console-monaco-monospace px-5 py-4\">\r\n  <h5 class=\"font-size-1_5em\">Cyphr:</h5>\r\n  <p class=\"w-100\">\r\n    It is a Web App made to offer modular endoding, decoding and conversion of text based message or string.<br />\r\n    All the operation are done within the browser without any server involvement.\r\n  </p>\r\n  <div class=\"w-100 col-xl-5 col-lg-6 col-md-9 cointainer row no-gutters\">\r\n    <b class=\"margin-top-0_7rem col-xl-2 col-lg-3 col-md-2\">Made by:</b>\r\n    <button class=\"btn btn-secondary col-xl-3 col-lg-4 col-md-3 m-1\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Pru Namikaze</button>\r\n    <button class=\"btn btn-secondary col-xl-3 col-lg-4 col-md-4 m-1 p-2\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Cyphr Github</button>\r\n  </div>\r\n  <br />\r\n</footer>\r\n"
+module.exports = "<footer class=\"col-12 align-self-center no-gutters align-self-end container row bg-white font-family-lucida-console-monaco-monospace px-5 py-4\">\r\n  <h5 class=\"font-size-1_5em\">Cyphr:</h5>\r\n  <p class=\"w-100\">\r\n    It is a Web App made to offer modular endoding, decoding and conversion of text based message or string.<br />\r\n    All the operation are done within the browser without any server involvement.\r\n  </p>\r\n  <div class=\"w-100 col-xl-5 col-lg-6 col-md-9 cointainer row no-gutters\">\r\n    <b class=\"margin-top-0_7rem col-xl-2 col-lg-3 col-md-2\">Made by:</b>\r\n    <button class=\"btn btn-secondary col-xl-3 col-lg-4 col-md-3 m-1\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Pru Namikaze</button>\r\n  </div>\r\n  <br />\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -1301,7 +1330,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"vw-100 no-gutters\">\n  <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n    <span class=\"navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2\">\n      <h1>Cyphr</h1>\n    </span>\n  </nav>\n</header>\n"
+module.exports = "<header class=\"container-fluid no-gutters\">\n  <nav class=\"navbar navbar-expand-lg navbar-light bg-light row\">\n    <span class=\"navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2\">\n      <h1>Cyphr</h1>\n    </span>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#cypher-navigation-item\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse justify-content-end\" id=\"cypher-navigation-item\">\n      <ul class=\"navbar-nav\">\n        <li class=\"navbar-item active\">\n            <button class=\"btn btn-secondary m-2\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Cyphr Github</button>\n        </li>\n        <li class=\"navbar-item active\">\n            <button class=\"btn btn-secondary m-2\"  [routerLink]=\"['/AboutUs']\" routerLinkActive=\"active\">About Us</button>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</header>\n"
 
 /***/ }),
 
@@ -1317,10 +1346,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/common.service */ "./src/app/services/common.service.ts");
+
 
 
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent() {
+    function HeaderComponent(common) {
+        this.common = common;
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
@@ -1330,7 +1362,7 @@ var HeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./header.component.html */ "./src/app/templates/header/header.component.html"),
             styles: [__webpack_require__(/*! ./header.component.css */ "./src/app/templates/header/header.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_common_service__WEBPACK_IMPORTED_MODULE_2__["CommonService"]])
     ], HeaderComponent);
     return HeaderComponent;
 }());
@@ -1550,13 +1582,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./header/header.component */ "./src/app/templates/header/header.component.ts");
-/* harmony import */ var _footer_footer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./footer/footer.component */ "./src/app/templates/footer/footer.component.ts");
-/* harmony import */ var _main_component_main_component_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./main-component/main-component.component */ "./src/app/templates/main-component/main-component.component.ts");
-/* harmony import */ var _node_template_node_template_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node-template/node-template.component */ "./src/app/templates/node-template/node-template.component.ts");
-/* harmony import */ var _main_template_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./main-template.component */ "./src/app/templates/main-template.component.ts");
-/* harmony import */ var _cypher_menu_template_cypher_menu_template_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./cypher-menu-template/cypher-menu-template.component */ "./src/app/templates/cypher-menu-template/cypher-menu-template.component.ts");
-/* harmony import */ var _cypher_option_template_cypher_option_template_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cypher-option-template/cypher-option-template.component */ "./src/app/templates/cypher-option-template/cypher-option-template.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header/header.component */ "./src/app/templates/header/header.component.ts");
+/* harmony import */ var _footer_footer_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./footer/footer.component */ "./src/app/templates/footer/footer.component.ts");
+/* harmony import */ var _main_component_main_component_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./main-component/main-component.component */ "./src/app/templates/main-component/main-component.component.ts");
+/* harmony import */ var _node_template_node_template_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./node-template/node-template.component */ "./src/app/templates/node-template/node-template.component.ts");
+/* harmony import */ var _main_template_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./main-template.component */ "./src/app/templates/main-template.component.ts");
+/* harmony import */ var _cypher_menu_template_cypher_menu_template_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cypher-menu-template/cypher-menu-template.component */ "./src/app/templates/cypher-menu-template/cypher-menu-template.component.ts");
+/* harmony import */ var _cypher_option_template_cypher_option_template_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cypher-option-template/cypher-option-template.component */ "./src/app/templates/cypher-option-template/cypher-option-template.component.ts");
+/* harmony import */ var _about_us_template_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./about-us-template.component */ "./src/app/templates/about-us-template.component.ts");
+
+
 
 
 
@@ -1574,20 +1610,22 @@ var TemplatesModule = /** @class */ (function () {
     TemplatesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"],
-                _header_header_component__WEBPACK_IMPORTED_MODULE_4__["HeaderComponent"],
-                _footer_footer_component__WEBPACK_IMPORTED_MODULE_5__["FooterComponent"],
-                _main_component_main_component_component__WEBPACK_IMPORTED_MODULE_6__["MainComponentComponent"],
-                _node_template_node_template_component__WEBPACK_IMPORTED_MODULE_7__["NodeTemplateComponent"],
-                _cypher_menu_template_cypher_menu_template_component__WEBPACK_IMPORTED_MODULE_9__["CypherMenuTemplateComponent"],
-                _cypher_option_template_cypher_option_template_component__WEBPACK_IMPORTED_MODULE_10__["CypherOptionTemplateComponent"]
+                _main_template_component__WEBPACK_IMPORTED_MODULE_9__["MainTemplateComponent"],
+                _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"],
+                _footer_footer_component__WEBPACK_IMPORTED_MODULE_6__["FooterComponent"],
+                _main_component_main_component_component__WEBPACK_IMPORTED_MODULE_7__["MainComponentComponent"],
+                _node_template_node_template_component__WEBPACK_IMPORTED_MODULE_8__["NodeTemplateComponent"],
+                _cypher_menu_template_cypher_menu_template_component__WEBPACK_IMPORTED_MODULE_10__["CypherMenuTemplateComponent"],
+                _cypher_option_template_cypher_option_template_component__WEBPACK_IMPORTED_MODULE_11__["CypherOptionTemplateComponent"],
+                _about_us_template_component__WEBPACK_IMPORTED_MODULE_12__["AboutUsTemplateComponent"]
             ],
             imports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"]
             ],
             exports: [
-                _main_component_main_component_component__WEBPACK_IMPORTED_MODULE_6__["MainComponentComponent"]
+                _main_component_main_component_component__WEBPACK_IMPORTED_MODULE_7__["MainComponentComponent"]
             ]
         })
     ], TemplatesModule);

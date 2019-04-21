@@ -1,12 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AboutUsTemplateComponent } from './templates/about-us-template.component';
 import { AppComponent } from './app.component';
 import { TemplatesModule } from './templates/templates.module';
 import { MainTemplateComponent } from './templates/main-template.component';
-import { RouterModule } from '@angular/router';
+
+const routes: Routes = [
+  {path: 'AboutUs', component: AboutUsTemplateComponent},
+  {path: '', component: MainTemplateComponent},
+  {path: '**', component: MainTemplateComponent}
+];
+
 
 @NgModule({
   declarations: [
@@ -14,11 +21,12 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     TemplatesModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: '', component: MainTemplateComponent}
+      {path: 'AboutUs', component: AboutUsTemplateComponent},
+      {path: '', component: MainTemplateComponent},
+      {path: '**', component: MainTemplateComponent, pathMatch: 'full'}
     ])
   ],
   providers: [],

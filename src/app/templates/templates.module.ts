@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { Observable, of } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -12,6 +11,7 @@ import { NodeTemplateComponent } from './node-template/node-template.component';
 import { MainTemplateComponent } from './main-template.component';
 import { CypherMenuTemplateComponent } from './cypher-menu-template/cypher-menu-template.component';
 import { CypherOptionTemplateComponent } from './cypher-option-template/cypher-option-template.component';
+import { AboutUsTemplateComponent } from './about-us-template.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +21,11 @@ import { CypherOptionTemplateComponent } from './cypher-option-template/cypher-o
     MainComponentComponent,
     NodeTemplateComponent,
     CypherMenuTemplateComponent,
-    CypherOptionTemplateComponent
+    CypherOptionTemplateComponent,
+    AboutUsTemplateComponent
   ],
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule
   ],

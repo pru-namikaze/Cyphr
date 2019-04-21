@@ -1,7 +1,20 @@
-<header class="vw-100 no-gutters">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header class="container-fluid no-gutters">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light row">
     <span class="navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2">
       <h1>Cyphr</h1>
     </span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cypher-navigation-item">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="cypher-navigation-item">
+      <ul class="navbar-nav">
+        <li class="navbar-item active">
+            <button class="btn btn-secondary m-2" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">Cyphr Github</button>
+        </li>
+        <li class="navbar-item active">
+            <button class="btn btn-secondary m-2"  [routerLink]="['/AboutUs']" routerLinkActive="active">About Us</button>
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>
