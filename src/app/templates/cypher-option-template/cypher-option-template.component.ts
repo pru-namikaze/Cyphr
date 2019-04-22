@@ -19,9 +19,7 @@ export class CypherOptionTemplateComponent implements OnInit {
   ngOnInit() {
     this.id = this.id[0][0];
     // tslint:disable-next-line: max-line-length
-    console.table(this.infrastructureNodeList.NodeList);
     this.cypherOptions = this.domainData.getCypherOptions(this.infrastructureNodeList.NodeList[this.id][1], this.infrastructureNodeList.NodeList[this.id][3][0]);
-    console.table([this.id, this.cypherOptions]);
   }
 
   isInputRange(optionArray: any): boolean {

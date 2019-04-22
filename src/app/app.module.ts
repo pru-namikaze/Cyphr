@@ -7,6 +7,7 @@ import { AboutUsTemplateComponent } from './templates/about-us-template.componen
 import { AppComponent } from './app.component';
 import { TemplatesModule } from './templates/templates.module';
 import { MainTemplateComponent } from './templates/main-template.component';
+import { HomePageTemplateComponent } from './templates/home-page-template.component';
 
 const routes: Routes = [
   {path: 'AboutUs', component: AboutUsTemplateComponent},
@@ -24,9 +25,10 @@ const routes: Routes = [
     TemplatesModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: 'AboutUs', component: AboutUsTemplateComponent},
-      {path: '', component: MainTemplateComponent},
-      {path: '**', component: MainTemplateComponent, pathMatch: 'full'}
+      {path: 'AboutUs', component: AboutUsTemplateComponent, pathMatch: 'full'},
+      {path: '', component: HomePageTemplateComponent, pathMatch: 'full'},
+      {path: 'Cypher', component: MainTemplateComponent, pathMatch: 'full'},
+      {path: '**', component: HomePageTemplateComponent, pathMatch: 'full'}
     ])
   ],
   providers: [],

@@ -96,6 +96,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _templates_templates_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./templates/templates.module */ "./src/app/templates/templates.module.ts");
 /* harmony import */ var _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./templates/main-template.component */ "./src/app/templates/main-template.component.ts");
+/* harmony import */ var _templates_home_page_template_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./templates/home-page-template.component */ "./src/app/templates/home-page-template.component.ts");
+
 
 
 
@@ -123,9 +125,10 @@ var AppModule = /** @class */ (function () {
                 _templates_templates_module__WEBPACK_IMPORTED_MODULE_7__["TemplatesModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot([
-                    { path: 'AboutUs', component: _templates_about_us_template_component__WEBPACK_IMPORTED_MODULE_5__["AboutUsTemplateComponent"] },
-                    { path: '', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"] },
-                    { path: '**', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"], pathMatch: 'full' }
+                    { path: 'AboutUs', component: _templates_about_us_template_component__WEBPACK_IMPORTED_MODULE_5__["AboutUsTemplateComponent"], pathMatch: 'full' },
+                    { path: '', component: _templates_home_page_template_component__WEBPACK_IMPORTED_MODULE_9__["HomePageTemplateComponent"], pathMatch: 'full' },
+                    { path: 'Cypher', component: _templates_main_template_component__WEBPACK_IMPORTED_MODULE_8__["MainTemplateComponent"], pathMatch: 'full' },
+                    { path: '**', component: _templates_home_page_template_component__WEBPACK_IMPORTED_MODULE_9__["HomePageTemplateComponent"], pathMatch: 'full' }
                 ])
             ],
             providers: [],
@@ -962,10 +965,12 @@ var InfrastructureNodeListService = /** @class */ (function () {
         }
     };
     InfrastructureNodeListService.prototype.selectOptionClick = function (id, cypherName) {
+        id = id[0];
         this.AddNodeToNodeList(this.NodeList[id][1], cypherName, id);
         this.RemoveNodeAtindex(id + 1);
     };
     InfrastructureNodeListService.prototype.UpdateCypherOptionValueFromNodeList = function (id, filterOption) {
+        console.log('123456789');
         var type = this.NodeList[id][1];
         var cypher = this.NodeList[id][2];
         var newNode = this.NodeList[id];
@@ -1110,7 +1115,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal fade font-family-lucida-console-monaco-monospace\" id=\"cypher-menu\" tabindex=\"-1\">\r\n  <div class=\"modal-dialog modal-lg\">\r\n    <div class=\"modal-content p-5\">\r\n      <div class=\" container row modal-head\">\r\n        <h2 class=\"modal-title col-10\">Cypher Menu</h2>\r\n        <button class=\"btn btn-secondary shadow col-2 btn-cypher-menu-close max-button-height-3rem\" type=\"button\" data-dismiss=\"modal\">&nbsp;X&nbsp;</button>\r\n      </div>\r\n      <div class=\"modal-body padding-0 container row\" *ngFor=\"let type of domainDataService.getTypeArray()\">\r\n          <hr class=\"w-100\"/>\r\n          <button class=\"btn btn-secondary my-2\" type=\"button\" disabled>{{type}}</button>\r\n          <span class=\"w-100\"></span>\r\n          <button class=\"btn btn-secondary mr-1 mb-1\" *ngFor=\"let cypher of domainDataService.getTypeCypherArray(type)\" (click)=\"infrastructureNodeList.AddNodeToNodeList(type, cypher)\" data-dismiss=\"modal\">\r\n            {{cypher}}\r\n          </button>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n        <button class=\"btn btn-secondary\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Request more Cyphers</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"modal fade font-family-lucida-console-monaco-monospace\" id=\"cypher-menu\" tabindex=\"-1\">\r\n  <div class=\"modal-dialog modal-lg\">\r\n    <div class=\"modal-content p-5\">\r\n      <div class=\" container row modal-head\">\r\n        <h2 class=\"modal-title col-10\">Cypher Menu</h2>\r\n        <button class=\"btn btn-danger shadow col-2 btn-cypher-menu-close max-button-height-3rem\" type=\"button\" data-dismiss=\"modal\">&nbsp;X&nbsp;</button>\r\n      </div>\r\n      <div class=\"modal-body padding-0 container row\" *ngFor=\"let type of domainDataService.getTypeArray()\">\r\n          <hr class=\"w-100\"/>\r\n          <button class=\"btn btn-primary my-2\" type=\"button\" disabled>{{type}}</button>\r\n          <span class=\"w-100\"></span>\r\n          <button class=\"btn btn-outline-info mr-1 mb-1\" *ngFor=\"let cypher of domainDataService.getTypeCypherArray(type)\" (click)=\"infrastructureNodeList.AddNodeToNodeList(type, cypher)\" data-dismiss=\"modal\">\r\n            {{cypher}}\r\n          </button>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n        <button class=\"btn btn-secondary\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Request more Cyphers</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1176,7 +1181,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<hr class=\"w-100\" />\r\n<div *ngIf=\"isView()\">\r\n    <textarea class=\"mx-1 w-100\" [(ngModel)]=\"infrastructureNodeList.NodeList[id][4]\"></textarea>\r\n  </div>\r\n<div class=\"row\" *ngIf=\"!isView()\">\r\n  <div class=\"col\" *ngFor=\"let options of cypherOptions\" [ngSwitch]=\"options[2].length.toString()\">\r\n    <span class=\"font-weight-bolder font-size-1_25em\">\r\n      {{options[1]}}\r\n    </span>\r\n    <input type=\"text\" id=\"{{ id + options[1] }}\" *ngSwitchCase=\"'1'\"\r\n      [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\"\r\n      (keypress)=\"infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])\" />\r\n\r\n    <div *ngSwitchCase=\"'2'\">\r\n      <!-- // TODO: Make the button Work. -->\r\n      <div class=\"input-group row max-width-5rem ml-1\" *ngIf=\"isInputRange(options[2])\">\r\n        <button class=\"input-group-prepend btn btn-secondary max-width-5rem btn-vertical-input-group-top-rounded\" type=\"button\">&nbsp; + &nbsp;</button>\r\n        <input type=\"text\" class=\"max-width-5rem\"\r\n          [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\" />\r\n        <button class=\" input-group-append btn btn-secondary max-width-5rem btn-vertical-input-group-bottom-rounded\" type=\"button\">&nbsp; - &nbsp;</button>\r\n      </div>\r\n\r\n      <div class=\"dropdown\" *ngIf=\"!isInputRange(options[2])\">\r\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n          {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n        </button>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n          <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"dropdown\" *ngSwitchDefault>\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <hr class=\"w-100 mx-3\" />\r\n</div>\r\n"
+module.exports = "<hr class=\"w-100\" />\r\n<div *ngIf=\"isView()\">\r\n    <textarea class=\"mx-1 w-100\" [(ngModel)]=\"infrastructureNodeList.NodeList[id][4]\"></textarea>\r\n  </div>\r\n<div class=\"row\" *ngIf=\"!isView()\">\r\n  <div class=\"col\" *ngFor=\"let options of cypherOptions\" [ngSwitch]=\"options[2].length.toString()\">\r\n    <span class=\"font-weight-bolder font-size-1_25em\">\r\n      {{options[1]}}\r\n    </span>\r\n    <input type=\"text\" id=\"{{ id + options[1] }}\" *ngSwitchCase=\"'1'\"\r\n      [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\"\r\n      (keypress)=\"infrastructureNodeList.UpdateCypherOptionValueFromNodeList(options[0])\" />\r\n\r\n    <div *ngSwitchCase=\"'2'\">\r\n      <!-- // TODO: Make the button Work. -->\r\n      <div class=\"input-group row max-width-5rem ml-1\" *ngIf=\"isInputRange(options[2])\">\r\n        <button class=\"input-group-prepend btn btn-info max-width-5rem btn-vertical-input-group-top-rounded\" type=\"button\">&nbsp; + &nbsp;</button>\r\n        <input type=\"text\" class=\"max-width-5rem\"\r\n          [ngModel]=\"getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])\" />\r\n        <button class=\" input-group-append btn btn-info max-width-5rem btn-vertical-input-group-bottom-rounded\" type=\"button\">&nbsp; - &nbsp;</button>\r\n      </div>\r\n\r\n      <div class=\"dropdown\" *ngIf=\"!isInputRange(options[2])\">\r\n        <button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n          {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n        </button>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n          <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"dropdown\" *ngSwitchDefault>\r\n      <button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{getCypherOptionValueFromNodeList(infrastructureNodeList.NodeList[id][3][1], options[0])}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of options[2]\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <hr class=\"w-100 mx-3\" />\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1209,9 +1214,7 @@ var CypherOptionTemplateComponent = /** @class */ (function () {
     CypherOptionTemplateComponent.prototype.ngOnInit = function () {
         this.id = this.id[0][0];
         // tslint:disable-next-line: max-line-length
-        console.table(this.infrastructureNodeList.NodeList);
         this.cypherOptions = this.domainData.getCypherOptions(this.infrastructureNodeList.NodeList[this.id][1], this.infrastructureNodeList.NodeList[this.id][3][0]);
-        console.table([this.id, this.cypherOptions]);
     };
     CypherOptionTemplateComponent.prototype.isInputRange = function (optionArray) {
         if (!((isNaN(optionArray[0])) && (isNaN(optionArray[0])))) {
@@ -1271,7 +1274,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<footer class=\"col-12 align-self-center no-gutters align-self-end container row bg-white font-family-lucida-console-monaco-monospace px-5 py-4\">\r\n  <h5 class=\"font-size-1_5em\">Cyphr:</h5>\r\n  <p class=\"w-100\">\r\n    It is a Web App made to offer modular endoding, decoding and conversion of text based message or string.<br />\r\n    All the operation are done within the browser without any server involvement.\r\n  </p>\r\n  <div class=\"w-100 col-xl-5 col-lg-6 col-md-9 cointainer row no-gutters\">\r\n    <b class=\"margin-top-0_7rem col-xl-2 col-lg-3 col-md-2\">Made by:</b>\r\n    <button class=\"btn btn-secondary col-xl-3 col-lg-4 col-md-3 m-1\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Pru Namikaze</button>\r\n  </div>\r\n  <br />\r\n</footer>\r\n"
+module.exports = "<footer class=\"col-12 align-self-center no-gutters align-self-end container row bg-white font-family-lucida-console-monaco-monospace px-5 py-4\">\r\n  <h5 class=\"font-size-1_5em\">Cyphr:</h5>\r\n  <p class=\"w-100\">\r\n    It is a Web App made to offer modular endoding, decoding and conversion of text based message or string.<br />\r\n    All the operation are done within the browser without any server involvement.\r\n  </p>\r\n  <div class=\"w-100 col-xl-5 col-lg-6 col-md-9 cointainer row no-gutters\">\r\n    <b class=\"margin-top-0_7rem col-xl-2 col-lg-3 col-md-2\">Made by:</b>\r\n    <button class=\"btn btn-outline-info col-xl-3 col-lg-4 col-md-3 m-1\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Pru Namikaze</button>\r\n  </div>\r\n  <br />\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -1330,7 +1333,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"container-fluid no-gutters\">\n  <nav class=\"navbar navbar-expand-lg navbar-light bg-light row\">\n    <span class=\"navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2\">\n      <h1>Cyphr</h1>\n    </span>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#cypher-navigation-item\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse justify-content-end\" id=\"cypher-navigation-item\">\n      <ul class=\"navbar-nav\">\n        <li class=\"navbar-item active\">\n            <button class=\"btn btn-secondary m-2\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Cyphr Github</button>\n        </li>\n        <li class=\"navbar-item active\">\n            <button class=\"btn btn-secondary m-2\"  [routerLink]=\"['/AboutUs']\" routerLinkActive=\"active\">About Us</button>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</header>\n"
+module.exports = "<header class=\"container-fluid row  no-gutters bg-white\">\n  <nav class=\"navbar navbar-expand-lg navbar-light row col-12 col-md-10 col-lg-8 col-xl-8 offset-md-1 offset-lg-2 offset-xl-2\">\n    <span class=\"navbar-brand font-family-lucida-console-monaco-monospace pt-2\" [routerLink]=\"['']\" routerLinkActive=\"active\">\n      <h1>Cyphr</h1>\n    </span>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#cypher-navigation-item\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse justify-content-end\" id=\"cypher-navigation-item\">\n      <ul class=\"navbar-nav\">\n        <li class=\"navbar-item active\">\n          <button class=\"btn btn-outline-info font-size-1_15em m-2\" [routerLink]=\"['/Cypher']\" routerLinkActive=\"active\">Cypher</button>\n        </li>\n        <li class=\"navbar-item active\">\n          <button class=\"btn btn-outline-info font-size-1_15em m-2\" [routerLink]=\"['/AboutUs']\" routerLinkActive=\"active\">About Us</button>\n        </li>\n        <li class=\"navbar-item active\">\n            <button class=\"btn btn-outline-info font-size-1_15em m-2\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">Cyphr Github</button>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</header>\n"
 
 /***/ }),
 
@@ -1371,6 +1374,62 @@ var HeaderComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/templates/home-page-template.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/templates/home-page-template.component.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3RlbXBsYXRlcy9ob21lLXBhZ2UtdGVtcGxhdGUuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/templates/home-page-template.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/templates/home-page-template.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-header></app-header>\n\n<div class=\"jumbotron-fluid bg-black\">\n  <img class=\"img-fluid w-100 mx-auto d-block\" src=\"http://itcher.com/mag/wp-content/uploads/2015/11/The-Imitation-Game.jpg\" />\n</div>\n\n<app-footer></app-footer>\n"
+
+/***/ }),
+
+/***/ "./src/app/templates/home-page-template.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/templates/home-page-template.component.ts ***!
+  \***********************************************************/
+/*! exports provided: HomePageTemplateComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageTemplateComponent", function() { return HomePageTemplateComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var HomePageTemplateComponent = /** @class */ (function () {
+    function HomePageTemplateComponent() {
+    }
+    HomePageTemplateComponent.prototype.ngOnInit = function () {
+    };
+    HomePageTemplateComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-home-page-template',
+            template: __webpack_require__(/*! ./home-page-template.component.html */ "./src/app/templates/home-page-template.component.html"),
+            styles: [__webpack_require__(/*! ./home-page-template.component.css */ "./src/app/templates/home-page-template.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], HomePageTemplateComponent);
+    return HomePageTemplateComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/templates/main-component/main-component.component.css":
 /*!***********************************************************************!*\
   !*** ./src/app/templates/main-component/main-component.component.css ***!
@@ -1389,7 +1448,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-cypher-menu-template></app-cypher-menu-template>\r\n\r\n<div class=\" container-fluid no-gutters padding-0 row \">\r\n  <button class=\"btn btn-secondary offset-6 my-4\" id=\"-1-node-list-conjuction\" type=\"button\" data-toggle=\"modal\" data-target=\"#cypher-menu\" (click)=\"infrastructureNodeList.ShowCypherMenu()\" (mouseover)=\"infrastructureNodeList.ArrowToPlus(-1, true)\" (mouseout)=\"infrastructureNodeList.ArrowToPlus(-1, false)\">\r\n    <span class=\"fas fa-chevron-down\"></span>\r\n  </button>\r\n\r\n  <app-node-template class=\"jumbotron-fluid\" *ngFor=\"let node of infrastructureNodeList.NodeList\" [id]=[node[0]]>\r\n  </app-node-template>\r\n\r\n  <button class=\"btn btn-secondary btn-feedback font-size-1_15em\" type=\"button\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">\r\n    <span class=\"fas fa-comment-dots\"></span>&nbsp;Feedback\r\n  </button>\r\n\r\n\r\n  <div class=\"back-to-top-btn\" id=\"back-to-top-btn\">\r\n    <button class=\"btn btn-secondary\" type=\"button\" (click)=\"infrastructureNodeList.WindowScrollTo(0)\">\r\n      Back <br />\r\n      to Top\r\n    </button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<app-cypher-menu-template></app-cypher-menu-template>\r\n\r\n<div class=\" container-fluid no-gutters padding-0 row \">\r\n  <button class=\"btn btn-dark btn-plus-cypher-flow offset-6 my-4\" id=\"-1-node-list-conjuction\" type=\"button\" data-toggle=\"modal\" data-target=\"#cypher-menu\" (click)=\"infrastructureNodeList.ShowCypherMenu()\" (mouseover)=\"infrastructureNodeList.ArrowToPlus(-1, true)\" (mouseout)=\"infrastructureNodeList.ArrowToPlus(-1, false)\">\r\n    <span class=\"fas fa-chevron-down\"></span>\r\n  </button>\r\n\r\n  <app-node-template class=\"jumbotron-fluid\" *ngFor=\"let node of infrastructureNodeList.NodeList\" [id]=[node[0]]>\r\n  </app-node-template>\r\n\r\n  <button class=\"btn btn-dark btn-feedback font-size-1_15em\" type=\"button\" (click)=\"common.OpenWebPageInNewTab(common.githubIssuePage)\">\r\n      &nbsp;Feedback&nbsp;&nbsp;<span class=\"fas fa-comment-dots\"></span>&nbsp;\r\n  </button>\r\n\r\n\r\n  <div class=\"back-to-top-btn\" id=\"back-to-top-btn\">\r\n    <button class=\"btn btn-dark\" type=\"button\" (click)=\"infrastructureNodeList.WindowScrollTo(0)\">\r\n      Back <br />\r\n      to Top\r\n    </button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1519,7 +1578,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"vw-100 container-fluid font-family-lucida-console-monaco-monospace bg-white border rounded shadow row col-10 col-md-8 col-lg-6 col-xl-6 offset-1 offset-md-2 offset-lg-3 offset-xl-3\">\r\n  <div class=\"w-100 my-4 mx-3 row\">\r\n    <!-- Dropdown for Encode/ Decode. -->\r\n    <div class=\"btn-group dropright col-sm-2 dropdown-encode-decode max-button-height-3rem\">\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"\r\n        *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n        {{infrastructureNodeList.NodeList[id][2]}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of domainData.encodeDecodeOptions\"\r\n          (click)=\"infrastructureNodeList.selectencodeDecodeOptionClick(option, id)\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Cypher Type -->\r\n    <span class=\" font-family-lucida-console-monaco-monospace font-size-2em col-sm-8 text-center\">\r\n      {{infrastructureNodeList.NodeList[id][1]}}\r\n    </span>\r\n\r\n    <!-- Button for Removin the node from the Encoding Decoding Stream. -->\r\n    <button class=\"btn btn-secondary col-sm-1 btn-close max-button-height-3rem offset-1\" type=\"button\" (click)=\"infrastructureNodeList.RemoveNodeAtindex(id)\">\r\n      X\r\n    </button>\r\n\r\n    <!-- Cypher Name -->\r\n    <div class=\"dropright m-3\">\r\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{infrastructureNodeList.NodeList[id][3][0]}}\r\n      </button>\r\n      <div class=\"dropdown-menu\">\r\n        <button class=\"dropdown-item\" type=\"button\"\r\n          (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)\">\r\n          Other Cyphers</button>\r\n        <hr />\r\n        <button class=\"dropdown-item\" type=\"button\"\r\n          *ngFor=\"let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])\"\r\n          (click)=\"infrastructureNodeList.selectOptionClick(id, option)\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Cypher Options -->\r\n    <app-cypher-option class=\"container-fluid padding-0 mx-3\" [id]=[id]></app-cypher-option>\r\n\r\n    <div class=\"w-100 mx-3\" *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n      // TODO: Add time taken for performance measurement.\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<button class=\"btn btn-secondary offset-6 my-4\" id=\"{{ id + '-node-list-conjuction' }}\" type=\"button\"\r\n  data-toggle=\"modal\" data-target=\"#cypher-menu\"\r\n  (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)\"\r\n  (mouseover)=\"infrastructureNodeList.ArrowToPlus(id, true)\" (mouseout)=\"infrastructureNodeList.ArrowToPlus(id, false)\">\r\n  <span class=\"fas fa-chevron-down\"></span>\r\n</button>\r\n"
+module.exports = "<div class=\"vw-100 container-fluid font-family-lucida-console-monaco-monospace bg-white border rounded shadow row col-10 col-md-8 col-lg-6 col-xl-6 offset-1 offset-md-2 offset-lg-3 offset-xl-3\">\r\n  <div class=\"w-100 my-4 mx-3 row\">\r\n    <!-- Dropdown for Encode/ Decode. -->\r\n    <div class=\"btn-group dropright col-sm-2 dropdown-encode-decode max-button-height-3rem\">\r\n      <button class=\"btn btn-primary dropdown-toggle btn-color-endoder-decoder\" type=\"button\" data-toggle=\"dropdown\"\r\n        *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n        {{infrastructureNodeList.NodeList[id][2]}}\r\n      </button>\r\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\r\n        <button class=\"dropdown-item\" type=\"button\" *ngFor=\"let option of domainData.encodeDecodeOptions\"\r\n          (click)=\"infrastructureNodeList.selectencodeDecodeOptionClick(option, id)\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Cypher Type -->\r\n    <span class=\" font-family-lucida-console-monaco-monospace font-size-2em col-sm-8 text-center\">\r\n      {{infrastructureNodeList.NodeList[id][1]}}\r\n    </span>\r\n\r\n    <!-- Button for Removin the node from the Encoding Decoding Stream. -->\r\n    <button class=\"btn btn-danger col-sm-1 btn-close max-button-height-3rem offset-1\" type=\"button\" (click)=\"infrastructureNodeList.RemoveNodeAtindex(id)\">\r\n      X\r\n    </button>\r\n\r\n    <!-- Cypher Name -->\r\n    <div class=\"dropright m-3\">\r\n      <button class=\"btn btn-info dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\r\n        {{infrastructureNodeList.NodeList[id][3][0]}}\r\n      </button>\r\n      <div class=\"dropdown-menu\">\r\n\r\n        <button class=\"dropdown-item\" type=\"button\"\r\n        data-toggle=\"modal\" data-target=\"#cypher-menu\" (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)\">\r\n          Other Cyphers</button>\r\n        <hr />\r\n        <button class=\"dropdown-item\" type=\"button\"\r\n          *ngFor=\"let option of domainData.getTypeCypherArray(infrastructureNodeList.NodeList[id][1])\"\r\n          (click)=\"infrastructureNodeList.selectOptionClick(id, option)\">{{option}}</button>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Cypher Options -->\r\n    <app-cypher-option class=\"container-fluid padding-0 mx-3\" [id]=[id]></app-cypher-option>\r\n\r\n    <div class=\"w-100 mx-3\" *ngIf=\"infrastructureNodeList.NodeList[id][2]\">\r\n      // TODO: Add time taken for performance measurement.\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<button class=\"btn btn-dark btn-plus-cypher-flow offset-6 my-4\" id=\"{{ id + '-node-list-conjuction' }}\" type=\"button\"\r\n  data-toggle=\"modal\" data-target=\"#cypher-menu\"\r\n  (click)=\"infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)\"\r\n  (mouseover)=\"infrastructureNodeList.ArrowToPlus(id, true)\" (mouseout)=\"infrastructureNodeList.ArrowToPlus(id, false)\">\r\n  <span class=\"fas fa-chevron-down\"></span>\r\n</button>\r\n"
 
 /***/ }),
 
@@ -1591,6 +1650,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cypher_menu_template_cypher_menu_template_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cypher-menu-template/cypher-menu-template.component */ "./src/app/templates/cypher-menu-template/cypher-menu-template.component.ts");
 /* harmony import */ var _cypher_option_template_cypher_option_template_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cypher-option-template/cypher-option-template.component */ "./src/app/templates/cypher-option-template/cypher-option-template.component.ts");
 /* harmony import */ var _about_us_template_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./about-us-template.component */ "./src/app/templates/about-us-template.component.ts");
+/* harmony import */ var _home_page_template_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./home-page-template.component */ "./src/app/templates/home-page-template.component.ts");
+
 
 
 
@@ -1617,7 +1678,8 @@ var TemplatesModule = /** @class */ (function () {
                 _node_template_node_template_component__WEBPACK_IMPORTED_MODULE_8__["NodeTemplateComponent"],
                 _cypher_menu_template_cypher_menu_template_component__WEBPACK_IMPORTED_MODULE_10__["CypherMenuTemplateComponent"],
                 _cypher_option_template_cypher_option_template_component__WEBPACK_IMPORTED_MODULE_11__["CypherOptionTemplateComponent"],
-                _about_us_template_component__WEBPACK_IMPORTED_MODULE_12__["AboutUsTemplateComponent"]
+                _about_us_template_component__WEBPACK_IMPORTED_MODULE_12__["AboutUsTemplateComponent"],
+                _home_page_template_component__WEBPACK_IMPORTED_MODULE_13__["HomePageTemplateComponent"]
             ],
             imports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],

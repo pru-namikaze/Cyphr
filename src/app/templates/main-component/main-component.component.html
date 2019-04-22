@@ -1,20 +1,20 @@
 <app-cypher-menu-template></app-cypher-menu-template>
 
 <div class=" container-fluid no-gutters padding-0 row ">
-  <button class="btn btn-secondary offset-6 my-4" id="-1-node-list-conjuction" type="button" data-toggle="modal" data-target="#cypher-menu" (click)="infrastructureNodeList.ShowCypherMenu()" (mouseover)="infrastructureNodeList.ArrowToPlus(-1, true)" (mouseout)="infrastructureNodeList.ArrowToPlus(-1, false)">
+  <button class="btn btn-dark btn-plus-cypher-flow offset-6 my-4" id="-1-node-list-conjuction" type="button" data-toggle="modal" data-target="#cypher-menu" (click)="infrastructureNodeList.ShowCypherMenu()" (mouseover)="infrastructureNodeList.ArrowToPlus(-1, true)" (mouseout)="infrastructureNodeList.ArrowToPlus(-1, false)">
     <span class="fas fa-chevron-down"></span>
   </button>
 
   <app-node-template class="jumbotron-fluid" *ngFor="let node of infrastructureNodeList.NodeList" [id]=[node[0]]>
   </app-node-template>
 
-  <button class="btn btn-secondary btn-feedback font-size-1_15em" type="button" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">
-    <span class="fas fa-comment-dots"></span>&nbsp;Feedback
+  <button class="btn btn-dark btn-feedback font-size-1_15em" type="button" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">
+      &nbsp;Feedback&nbsp;&nbsp;<span class="fas fa-comment-dots"></span>&nbsp;
   </button>
 
 
   <div class="back-to-top-btn" id="back-to-top-btn">
-    <button class="btn btn-secondary" type="button" (click)="infrastructureNodeList.WindowScrollTo(0)">
+    <button class="btn btn-dark" type="button" (click)="infrastructureNodeList.WindowScrollTo(0)">
       Back <br />
       to Top
     </button>

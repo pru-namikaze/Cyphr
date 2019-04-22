@@ -2,7 +2,7 @@
   <div class="w-100 my-4 mx-3 row">
     <!-- Dropdown for Encode/ Decode. -->
     <div class="btn-group dropright col-sm-2 dropdown-encode-decode max-button-height-3rem">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+      <button class="btn btn-primary dropdown-toggle btn-color-endoder-decoder" type="button" data-toggle="dropdown"
         *ngIf="infrastructureNodeList.NodeList[id][2]">
         {{infrastructureNodeList.NodeList[id][2]}}
       </button>
@@ -18,18 +18,19 @@
     </span>
 
     <!-- Button for Removin the node from the Encoding Decoding Stream. -->
-    <button class="btn btn-secondary col-sm-1 btn-close max-button-height-3rem offset-1" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
+    <button class="btn btn-danger col-sm-1 btn-close max-button-height-3rem offset-1" type="button" (click)="infrastructureNodeList.RemoveNodeAtindex(id)">
       X
     </button>
 
     <!-- Cypher Name -->
     <div class="dropright m-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+      <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
         {{infrastructureNodeList.NodeList[id][3][0]}}
       </button>
       <div class="dropdown-menu">
+
         <button class="dropdown-item" type="button"
-          (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)">
+        data-toggle="modal" data-target="#cypher-menu" (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1, true)">
           Other Cyphers</button>
         <hr />
         <button class="dropdown-item" type="button"
@@ -47,7 +48,7 @@
   </div>
 </div>
 
-<button class="btn btn-secondary offset-6 my-4" id="{{ id + '-node-list-conjuction' }}" type="button"
+<button class="btn btn-dark btn-plus-cypher-flow offset-6 my-4" id="{{ id + '-node-list-conjuction' }}" type="button"
   data-toggle="modal" data-target="#cypher-menu"
   (click)="infrastructureNodeList.ShowCypherMenu(infrastructureNodeList.NodeList[id][0]+1)"
   (mouseover)="infrastructureNodeList.ArrowToPlus(id, true)" (mouseout)="infrastructureNodeList.ArrowToPlus(id, false)">

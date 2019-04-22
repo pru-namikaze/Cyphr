@@ -12,6 +12,7 @@ import { MainTemplateComponent } from './main-template.component';
 import { CypherMenuTemplateComponent } from './cypher-menu-template/cypher-menu-template.component';
 import { CypherOptionTemplateComponent } from './cypher-option-template/cypher-option-template.component';
 import { AboutUsTemplateComponent } from './about-us-template.component';
+import { HomePageTemplateComponent } from './home-page-template.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AboutUsTemplateComponent } from './about-us-template.component';
     NodeTemplateComponent,
     CypherMenuTemplateComponent,
     CypherOptionTemplateComponent,
-    AboutUsTemplateComponent
+    AboutUsTemplateComponent,
+    HomePageTemplateComponent
   ],
   imports: [
     RouterModule,

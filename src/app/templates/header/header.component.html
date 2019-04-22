@@ -1,6 +1,6 @@
-<header class="container-fluid no-gutters">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light row">
-    <span class="navbar-brand font-family-lucida-console-monaco-monospace pl-5 ml-5 pt-2">
+<header class="container-fluid row  no-gutters bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light row col-12 col-md-10 col-lg-8 col-xl-8 offset-md-1 offset-lg-2 offset-xl-2">
+    <span class="navbar-brand font-family-lucida-console-monaco-monospace pt-2" [routerLink]="['']" routerLinkActive="active">
       <h1>Cyphr</h1>
     </span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cypher-navigation-item">
@@ -9,10 +9,13 @@
     <div class="collapse navbar-collapse justify-content-end" id="cypher-navigation-item">
       <ul class="navbar-nav">
         <li class="navbar-item active">
-            <button class="btn btn-secondary m-2" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">Cyphr Github</button>
+          <button class="btn btn-outline-info font-size-1_15em m-2" [routerLink]="['/Cypher']" routerLinkActive="active">Cypher</button>
         </li>
         <li class="navbar-item active">
-            <button class="btn btn-secondary m-2"  [routerLink]="['/AboutUs']" routerLinkActive="active">About Us</button>
+          <button class="btn btn-outline-info font-size-1_15em m-2" [routerLink]="['/AboutUs']" routerLinkActive="active">About Us</button>
+        </li>
+        <li class="navbar-item active">
+            <button class="btn btn-outline-info font-size-1_15em m-2" (click)="common.OpenWebPageInNewTab(common.githubIssuePage)">Cyphr Github</button>
         </li>
       </ul>
     </div>

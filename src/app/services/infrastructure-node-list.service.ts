@@ -100,11 +100,13 @@ export class InfrastructureNodeListService {
   }
 
   selectOptionClick(id: number, cypherName: string): void {
+    id = id[0];
     this.AddNodeToNodeList(this.NodeList[id][1], cypherName, id);
     this.RemoveNodeAtindex(id + 1);
   }
 
   UpdateCypherOptionValueFromNodeList(id: number, filterOption: string): void {
+    console.log('123456789');
     const type: string = this.NodeList[id][1];
     const cypher: string = this.NodeList[id][2];
 
